@@ -10,7 +10,7 @@ const headers = {
 };
 
 client.on('ready', () => {
-  console.log('Bot started !');
+  console.log('Observer started !');
 });
 const update = async () => {
     try {
