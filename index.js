@@ -52,4 +52,4 @@ const update = async () => {
 
 client.login(token);
 
-setInterval(update, 1000);
+setInterval(update, 120000);
