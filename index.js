@@ -14,8 +14,8 @@ client.on('ready', () => {
 });
 const update = async () => {
     try {
-        let state = "🟠";
-        let players = "?";
+        let state = "🔴";
+        let players = "0";
         let config = {
             method: 'get',
           maxBodyLength: Infinity,
@@ -31,10 +31,10 @@ const update = async () => {
             players = response.data["currentplayernum"].toString();
           })
           .catch((error) => {
-            players = "?";
+            players = "0";
           });
 
-          const state_reponse = await fetch("https://panel.louismazin.ovh/api/client/servers/c1e3ad72/resources", { method : "GET", headers });
+        const state_reponse = await fetch("https://panel.louismazin.ovh/api/client/servers/c1e3ad72/resources", { method : "GET", headers });
         const state_data = await state_reponse.json();
         if(state_data["attributes"]["current_state"] === "running"){
             state = "🟢";
@@ -43,6 +43,7 @@ const update = async () => {
         }
         const title = "Serveur : "+state+" Joueurs : "+players;
         client.channels.fetch("1256341578687975506").then((channel) => {
+            console.log("Updating channel name to : "+title);
             channel.setName(title);
         });
     } catch (error) {
@@ -52,4 +53,4 @@ const update = async () => {
 
 client.login(token);
 
-setInterval(update, 120000);
+setInterval(update, 60000);
