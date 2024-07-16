@@ -42,11 +42,8 @@ const update = async () => {
             state = "🔴";
         }
         const title = "Serveur : "+state+" Joueurs : "+players;
-        const channel = client.channels.fetch("1256341578687975506");
+        client.channels.cache.get('1256341578687975506').setName(title);
         console.log("Updating channel name to : "+title);
-        channel.then((c) => {
-            c.setName(title);
-        });
     } catch (error) {
         console.log(error);
     }
@@ -54,4 +51,4 @@ const update = async () => {
 
 client.login(token);
 
-setInterval(update, 1000);
+setInterval(update, 60000);
