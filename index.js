@@ -14,7 +14,7 @@ client.on('ready', () => {
 });
 const update = async () => {
     try {
-        let state = ":orange_circle:";
+        let state = "🟠";
         let players = "?";
         let config = {
             method: 'get',
@@ -28,7 +28,7 @@ const update = async () => {
           
           axios(config)
           .then((response) => {
-            return response.data["currentplayernum"].toString();
+            players = response.data["currentplayernum"].toString();
           })
           .catch((error) => {
             players = "?";
@@ -37,9 +37,9 @@ const update = async () => {
           const state_reponse = await fetch("https://panel.louismazin.ovh/api/client/servers/c1e3ad72/resources", { method : "GET", headers });
         const state_data = await state_reponse.json();
         if(state_data["attributes"]["current_state"] === "running"){
-            state = ":green_circle:";
+            state = "🟢";
         }else{
-            state = ":red_circle:";
+            state = "🔴";
         }
         const title = "Serveur : "+state+" Joueurs : "+players;
         client.channels.fetch("1256341578687975506").then((channel) => {
