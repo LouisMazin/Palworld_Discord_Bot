@@ -10,32 +10,37 @@ const headers = {
 };
 
 client.on('ready', () => {
-  console.log('Observer started !');
+  console.log('Bot started !');
 });
 const update = async () => {
-    check_state();
-    check_players();
+    const state = check_state();
+    const players = check_players();
+    const title = "Serveur : "+state+" Joueurs : "+players;
+    //set title of the channel 1256341578687975506
+    const channel = await client.channels.fetch("1256341578687975506");
+    channel.setName(title);
 }
 const check_players = async () => {
     try {
         let config = {
             method: 'get',
           maxBodyLength: Infinity,
-            url: 'http://localhost:8212/v1/api/metrics',
+            url: 'http://play.louismazin.ovh:1025/v1/api/metrics',
             headers: { 
-              'Accept': 'application/json'
+              'Accept': 'application/json', 
+              'Authorization': 'Basic YWRtaW46Y2FjYXBpcGlkdTc5'
             }
           };
           
           axios(config)
           .then((response) => {
-            console.log(JSON.stringify(response.data));
+            return response.data["currentplayernum"].toString();
           })
           .catch((error) => {
-            console.log(error);
+            return "?";
           });
     } catch (error) {
-        console.error("Une erreur s'est produite lors de la vérification des joueurs :", error);
+        return "?";
     }
 }
 const check_state = async () => {
@@ -43,12 +48,12 @@ const check_state = async () => {
         const state_reponse = await fetch("https://panel.louismazin.ovh/api/client/servers/c1e3ad72/resources", { method : "GET", headers });
         const state_data = await state_reponse.json();
         if(state_data["attributes"]["current_state"] === "running"){
-            console.log("Server is running !");
+            return ":green_circle:";
         }else{
-            console.log("Server is not running !");
+            return ":red_circle:";
         }
     } catch (error) {
-        console.error("Une erreur s'est produite lors de la vérification de l'état :", error);
+        return ":orange_circle:";
     }
 };
 client.login(token);
