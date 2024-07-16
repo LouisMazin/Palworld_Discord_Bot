@@ -13,8 +13,8 @@ client.on('ready', () => {
   console.log('Bot started !');
 });
 const update = async () => {
-    const state = check_state().then((state) => {;
-        const players = check_players().then((players) => {;
+    check_state().then((state) => {;
+        check_players().then((players) => {;
             const title = "Serveur : "+state+" Joueurs : "+players;
             const channel = client.channels.fetch("1256341578687975506");
             channel.setName(title);
