@@ -13,16 +13,9 @@ client.on('ready', () => {
   console.log('Bot started !');
 });
 const update = async () => {
-    check_state().then((state) => {;
-        check_players().then((players) => {;
-            const title = "Serveur : "+state+" Joueurs : "+players;
-            const channel = client.channels.fetch("1256341578687975506");
-            channel.setName(title);
-        });
-    });
-}
-const check_players = async () => {
     try {
+        const state = ":orange_circle:";
+        const players = "?";
         let config = {
             method: 'get',
           maxBodyLength: Infinity,
@@ -38,25 +31,31 @@ const check_players = async () => {
             return response.data["currentplayernum"].toString();
           })
           .catch((error) => {
-            return "?";
+            players = "?";
           });
-    } catch (error) {
-        return "?";
-    }
-}
-const check_state = async () => {
-    try {
-        const state_reponse = await fetch("https://panel.louismazin.ovh/api/client/servers/c1e3ad72/resources", { method : "GET", headers });
+
+          const state_reponse = await fetch("https://panel.louismazin.ovh/api/client/servers/c1e3ad72/resources", { method : "GET", headers });
         const state_data = await state_reponse.json();
         if(state_data["attributes"]["current_state"] === "running"){
-            return ":green_circle:";
+            state = ":green_circle:";
         }else{
-            return ":red_circle:";
+            state = ":red_circle:";
         }
+        const title = "Serveur : "+state+" Joueurs : "+players;
+        const channel = client.channels.fetch("1256341578687975506");
+        channel.setName(title);
     } catch (error) {
-        return ":orange_circle:";
+        console.log(error);
     }
-};
+    check_state().then((state) => {;
+        check_players().then((players) => {;
+            const title = "Serveur : "+state+" Joueurs : "+players;
+            const channel = client.channels.fetch("1256341578687975506");
+            channel.setName(title);
+        });
+    });
+}
+
 client.login(token);
 
 setInterval(update, 1000);
