@@ -47,13 +47,6 @@ const update = async () => {
     } catch (error) {
         console.log(error);
     }
-    check_state().then((state) => {;
-        check_players().then((players) => {;
-            const title = "Serveur : "+state+" Joueurs : "+players;
-            const channel = client.channels.fetch("1256341578687975506");
-            channel.setName(title);
-        });
-    });
 }
 
 client.login(token);
