@@ -42,8 +42,9 @@ const update = async () => {
             state = ":red_circle:";
         }
         const title = "Serveur : "+state+" Joueurs : "+players;
-        const channel = client.channels.fetch("1256341578687975506");
-        channel.setName(title);
+        client.channels.fetch("1256341578687975506").then((channel) => {
+            channel.setName(title);
+        });
     } catch (error) {
         console.log(error);
     }
