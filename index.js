@@ -14,8 +14,8 @@ client.on('ready', () => {
 });
 const update = async () => {
     try {
-        const state = ":orange_circle:";
-        const players = "?";
+        let state = ":orange_circle:";
+        let players = "?";
         let config = {
             method: 'get',
           maxBodyLength: Infinity,
