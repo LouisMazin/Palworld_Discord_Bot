@@ -8,6 +8,7 @@ const headers = {
     "Content-Type": "application/json",
     "Authorization": "Bearer "+args[3].toString()
 };
+const bot_guilds = [{"id" : "1230809896744779777", "infos_channel_id":"1256341578687975506"},{"id" : "1068240252092813373", "infos_channel_id":"1262892142037041203"}];
 
 client.on('ready', () => {
   console.log('Observer started !');
@@ -42,14 +43,16 @@ const update = async () => {
             state = "🔴";
         }
         const title = "Serveur : "+state+" Joueurs : "+players;
-        client.channels.fetch('1256341578687975506')
-          .then(channel => {
-            if(channel.name !== title){
-              channel.setName(title);
-              console.log("Updating channel name to : "+title);
-            }
-          })
-          .catch(console.error);
+        bot_guilds.forEach(element => {
+          client.channels.fetch(element.infos_channel_id)
+            .then(channel => {
+              if(channel.name != title){
+                channel.setName(title);
+                console.log(channel.guild.name+": Updating channel name to : "+title);
+              }
+            })
+            .catch(console.error);
+        });
         
     } catch (error) {
         console.log(error);
