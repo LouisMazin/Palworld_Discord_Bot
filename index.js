@@ -8,7 +8,7 @@ const headers = {
     "Content-Type": "application/json",
     "Authorization": "Bearer "+args[3].toString()
 };
-const bot_guilds = [{"id" : "1230809896744779777", "infos_channel_id":"1256341578687975506"},{"id" : "1068240252092813373", "infos_channel_id":"1262892142037041203"}];
+const bot_guilds = [{"name" : "Crashtest", "infos_channel_id":"1256341578687975506"},{"name" : "Rygain", "infos_channel_id":"1262892142037041203"}];
 
 client.on('ready', () => {
   console.log('Observer started !');
@@ -48,10 +48,10 @@ const update = async () => {
             .then(channel => {
               if(channel.name != title){
                 channel.setName(title);
-                console.log(channel.guild.name+": Updating channel name to : "+title);
+                console.log(element.name+": Updating channel name to : "+title);
               }
             })
-            .catch(console.error);
+            .catch(console.log("error on server "+element.name));
         });
         
     } catch (error) {
@@ -61,4 +61,4 @@ const update = async () => {
 
 client.login(token);
 
-setInterval(update, 60000);
+setInterval(update, 1000);
