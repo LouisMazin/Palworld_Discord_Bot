@@ -49,8 +49,6 @@ const update = async () => {
               if(channel.name != title){
                 channel.setName(title);
                 console.log(element.name+": Updating channel name to : "+title);
-              }else{
-                console.log("")
               }
             })
             .catch(error => {console.log("error on server "+element.name);});
