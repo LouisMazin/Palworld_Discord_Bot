@@ -16,7 +16,7 @@ client.on('ready', () => {
 const update = async () => {
     try {
         let state = "🔴";
-        let players = "𝟎";
+        let players = "0";
         let config = {
             method: 'get',
           maxBodyLength: Infinity,
@@ -32,7 +32,7 @@ const update = async () => {
             players = response.data["currentplayernum"];
           })
           .catch((error) => {
-            players = "𝟎";
+            players = "0";
           });
 
         const state_reponse = await fetch("https://panel.louismazin.ovh/api/client/servers/c1e3ad72/resources", { method : "GET", headers });
@@ -42,7 +42,8 @@ const update = async () => {
         }else{
             state = "🔴";
         }
-        const title = "𝐒𝐞𝐫𝐯𝐞𝐮𝐫 : "+state+" 𝐉𝐨𝐮𝐞𝐮𝐫𝐬 : "+numbers[players];
+        console.log(parseInt(players));
+        const title = "𝐒𝐞𝐫𝐯𝐞𝐮𝐫 : "+state+" 𝐉𝐨𝐮𝐞𝐮𝐫𝐬 : "+numbers[parseInt(players)];
         bot_guilds.forEach(element => {
           client.channels.fetch(element.infos_channel_id)
             .then(channel => {
@@ -53,7 +54,7 @@ const update = async () => {
                 console.log("")
               }
             })
-            .catch(console.log("error on server "+element.name));
+            .catch(error => {console.log("error on server "+element.name);});
         });
         
     } catch (error) {
@@ -63,4 +64,4 @@ const update = async () => {
 
 client.login(token);
 
-setInterval(update, 1000);
+setInterval(update, 60000);
