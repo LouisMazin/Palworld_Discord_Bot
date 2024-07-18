@@ -42,7 +42,7 @@ const update = async () => {
         }else{
             state = "🔴";
         }
-        const title = "Serveur : "+state+" Joueurs : "+players;
+        const title = "𝐒𝐞𝐫𝐯𝐞𝐮𝐫 : "+state+" 𝐉𝐨𝐮𝐞𝐮𝐫𝐬 : "+players;
         bot_guilds.forEach(element => {
           client.channels.fetch(element.infos_channel_id)
             .then(channel => {
