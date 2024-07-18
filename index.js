@@ -8,7 +8,7 @@ const headers = {
     "Content-Type": "application/json",
     "Authorization": "Bearer "+args[3].toString()
 };
-const bot_guilds = [{"name" : "Crashtest", "infos_channel_id":"1256341578687975506"},{"name" : "Rygain", "infos_channel_id":"1262892142037041203"}];
+const bot_guilds = [{"name" : "Crashtest", "infos_channel_id":"1256341578687975506"},{"name" : "Rygain", "infos_channel_id":"1263481798667796623"}];
 
 client.on('ready', () => {
   console.log('Observer started !');
