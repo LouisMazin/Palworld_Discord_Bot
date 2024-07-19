@@ -1,4 +1,5 @@
 const axios = require('axios');
+const Observer = require('./observer.js');
 const Discord = require('discord.js');
 const client = new Discord.Client({ intents: [Discord.GatewayIntentBits.GuildMessages] });
 const args = process.argv;
@@ -11,7 +12,7 @@ const headers = {
 const bot_guilds = [{"name" : "Crashtest", "infos_channel_id":"1256341578687975506"},{"name" : "Rygain", "infos_channel_id":"1263481798667796623"}];
 const numbers=["𝟎","𝟏","𝟐","𝟑","𝟒","𝟓","𝟔","𝟕","𝟖","𝟗","𝟏𝟎","𝟏𝟏","𝟏𝟐","𝟏𝟑","𝟏𝟒","𝟏𝟓","𝟏𝟔","𝟏𝟕","𝟏𝟖","𝟏𝟗","𝟐𝟎","𝟐𝟏","𝟐𝟐","𝟐𝟑","𝟐𝟒","𝟐𝟓","𝟐𝟔","𝟐𝟕","𝟐𝟖","𝟐𝟗","𝟑𝟎","𝟑𝟏","𝟑𝟐"];
 client.on('ready', () => {
-  console.log('Observer started !');
+  console.log('Bot started !');
 });
 const update = async () => {
     try {
@@ -42,23 +43,23 @@ const update = async () => {
         }else{
             state = "🔴";
         }
-        const title = "𝐒𝐞𝐫𝐯𝐞𝐮𝐫 : "+state+" 𝐉𝐨𝐮𝐞𝐮𝐫𝐬 : "+numbers[parseInt(players)];
+        const title = "Bot : 𝐒𝐞𝐫𝐯𝐞𝐮𝐫 : "+state+" 𝐉𝐨𝐮𝐞𝐮𝐫𝐬 : "+numbers[parseInt(players)];
         bot_guilds.forEach(element => {
           client.channels.fetch(element.infos_channel_id)
             .then(channel => {
               if(channel.name != title){
                 channel.setName(title);
-                console.log(element.name+": Updating channel name to : "+title);
+                console.log("Bot :"+element.name+": Updating channel name to : "+title);
               }
             })
-            .catch(error => {console.log("error on server "+element.name);});
+            .catch(error => {console.log("Bot : error on server "+element.name);});
         });
         
     } catch (error) {
-        console.log(error);
+        console.log("Bot : "+error);
     }
 }
 
 client.login(token);
 
-setInterval(update, 60000);
+setInterval(update, 1000);
