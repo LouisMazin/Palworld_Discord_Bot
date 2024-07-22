@@ -1,32 +1,28 @@
 const axios = require('axios');
-const url = "https://panel.louismazin.ovh/api/client/servers/c1e3ad72/";
-const headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-    "Authorization": "Bearer "+process.argv[3].toString()
-};
-const body_message = { "command": 'Broadcast Vidage_de_la_RAM_en_cours._Redémarrage_du_serveur.'};
-const body_restart = { "signal": "restart" };
+let restart = {method: 'post',maxBodyLength: Infinity,url: 'http://play.louismazin.ovh:1025/v1/api/shutdown',headers: { 'Accept': 'application/json', 'Authorization': 'Basic YWRtaW46Y2FjYXBpcGlkdTc5'},data : data};
+let save = {method: 'post',maxBodyLength: Infinity,url: 'http://play.louismazin.ovh:1025/v1/api/save',headers: {'Accept': 'application/json', 'Authorization': 'Basic YWRtaW46Y2FjYXBpcGlkdTc5'}};
+let check_ram = {method: 'get',maxBodyLength: Infinity,url: 'https://panel.louismazin.ovh/api/client/servers/c1e3ad72/resources',headers: {"Accept": "application/json","Content-Type": "application/json","Authorization": "Bearer "+process.argv[3].toString()}};
 const checkAndRestartServer = async () => {
     try {
-        const response = await fetch(url+"resources", { method : "GET", headers });
-        const data = await response.json();
-        if (data.attributes.resources.memory_bytes > 6442450944) { // 6 Go en octets
-            axios({
-                url: url + 'command',
-                method: 'POST',
-                headers: headers,
-                data: body_message,
-            })
-            axios({
-                url: url + 'power',
-                method: 'POST',
-                headers: headers,
-                data: body_restart,
-            })
-            console.log("Observer : La RAM utilisée est supérieure à 6 Go. Redémarrage du serveur nécessaire.");
-
-        }
+        axios(check_ram)
+        .then((response) => {
+            data = response.data;
+            if (data.attributes.resources.memory_bytes > 6442450944) { // 6 Go en octets
+                axios(save)
+                .then((response) => {
+                    axios(restart)
+                        .then((response) => {
+                        })
+                        .catch((error) => {
+                        console.log(error);
+                        });
+                    })
+                .catch((error) => {
+                    console.log(error);
+                });
+                console.log("Observer : RAM supérieure à 6,5 Go, serveur redémarré.");
+            }
+        })
     } catch (error) {
         console.error("Observer : ", error);
     }
