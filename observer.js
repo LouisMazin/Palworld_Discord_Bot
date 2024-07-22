@@ -7,7 +7,7 @@ const checkAndRestartServer = async () => {
         axios(check_ram)
         .then((response) => {
             data = response.data;
-            if (data.attributes.resources.memory_bytes > 6442450944) { // 6 Go en octets
+            if (data.attributes.resources.memory_bytes > 6979321856) { // 6.5 Go en octets
                 axios(save)
                 .then((response) => {
                     axios(restart)
@@ -20,7 +20,7 @@ const checkAndRestartServer = async () => {
                 .catch((error) => {
                     console.log(error);
                 });
-                console.log("Observer : RAM supérieure à 6,5 Go, serveur redémarré.");
+                console.log("Observer : RAM supérieure à 6.5 Go, serveur redémarré.");
             }
         })
     } catch (error) {
