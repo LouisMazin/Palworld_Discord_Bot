@@ -8,18 +8,7 @@ const checkAndRestartServer = async () => {
         .then((response) => {
             data = response.data;
             if (data.attributes.resources.memory_bytes > 6442450944) { // 6 Go en octets
-                axios(save)
-                .then((response) => {
-                    axios(restart)
-                        .then((response) => {
-                        })
-                        .catch((error) => {
-                        console.log(error);
-                        });
-                    })
-                .catch((error) => {
-                    console.log(error);
-                });
+                saveServer();
                 console.log("Observer : RAM supérieure à 6.5 Go, serveur redémarré.");
             }
         })
@@ -27,7 +16,20 @@ const checkAndRestartServer = async () => {
         console.error("Observer : ", error);
     }
 };
-
+function saveServer(){
+    axios(save)
+    .then((response) => {
+        axios(restart)
+            .then((response) => {
+            })
+            .catch((error) => {
+            console.log(error);
+            });
+        })
+    .catch((error) => {
+        console.log(error);
+    });
+}
 // Vérifier toutes les 3 minutes (180000 millisecondes)
 setInterval(checkAndRestartServer, 180000);
 console.log("Observer started !")
