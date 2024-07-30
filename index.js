@@ -1,6 +1,9 @@
 const axios = require('axios');
 const Observer = require('./observer.js');
 const Discord = require('discord.js');
+const path = require("node:path");
+const fs = require("node:fs")
+
 const client = new Discord.Client({ intents: [Discord.GatewayIntentBits.GuildMessages] });
 const args = process.argv;
 const token = args[2].toString();
@@ -11,10 +14,13 @@ const headers = {
 };
 const bot_guilds = [{"name" : "Crashtest", "infos_channel_id":"1256341578687975506"},{"name" : "Rygain", "infos_channel_id":"1263481798667796623"}];
 const numbers=["𝟎","𝟏","𝟐","𝟑","𝟒","𝟓","𝟔","𝟕","𝟖","𝟗","𝟏𝟎","𝟏𝟏","𝟏𝟐","𝟏𝟑","𝟏𝟒","𝟏𝟓","𝟏𝟔","𝟏𝟕","𝟏𝟖","𝟏𝟗","𝟐𝟎","𝟐𝟏","𝟐𝟐","𝟐𝟑","𝟐𝟒","𝟐𝟓","𝟐𝟔","𝟐𝟕","𝟐𝟖","𝟐𝟗","𝟑𝟎","𝟑𝟏","𝟑𝟐"];
+
+
 client.on('ready', () => {
   console.log('Bot started !');
   client.user.setPresence({ activities: [{ name: 'les messages du serveur.', type: 'WATCHING' }], status: 'online' });
 });
+
 const update = async () => {
     try {
         let state = "🔴";
