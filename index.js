@@ -1,8 +1,6 @@
 const axios = require('axios');
-const Observer = require('./observer.js');
+require('./observer.js');
 const Discord = require('discord.js');
-const path = require("node:path");
-const fs = require("node:fs")
 
 const client = new Discord.Client({ intents: [Discord.GatewayIntentBits.GuildMessages] });
 const args = process.argv;
