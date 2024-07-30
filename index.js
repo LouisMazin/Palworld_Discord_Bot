@@ -13,6 +13,7 @@ const bot_guilds = [{"name" : "Crashtest", "infos_channel_id":"12563415786879755
 const numbers=["𝟎","𝟏","𝟐","𝟑","𝟒","𝟓","𝟔","𝟕","𝟖","𝟗","𝟏𝟎","𝟏𝟏","𝟏𝟐","𝟏𝟑","𝟏𝟒","𝟏𝟓","𝟏𝟔","𝟏𝟕","𝟏𝟖","𝟏𝟗","𝟐𝟎","𝟐𝟏","𝟐𝟐","𝟐𝟑","𝟐𝟒","𝟐𝟓","𝟐𝟔","𝟐𝟕","𝟐𝟖","𝟐𝟗","𝟑𝟎","𝟑𝟏","𝟑𝟐"];
 client.on('ready', () => {
   console.log('Bot started !');
+  client.user.setPresence({ activities: [{ name: 'les messages du serveur.', type: 'WATCHING' }], status: 'online' });
 });
 const update = async () => {
     try {
