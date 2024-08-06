@@ -2,12 +2,13 @@ const axios = require('axios');
 let restart = {method: 'post',maxBodyLength: Infinity,url: 'http://play.louismazin.ovh:1025/v1/api/shutdown',headers: { 'Accept': 'application/json', 'Authorization': 'Basic YWRtaW46Y2FjYXBpcGlkdTc5'},data : JSON.stringify({"waittime": 10,"message": "La mémoire est pleine, le serveur redémarre dans 10 secondes. (ça prend 20 secondes)" })};
 let save = {method: 'post',maxBodyLength: Infinity,url: 'http://play.louismazin.ovh:1025/v1/api/save',headers: {'Accept': 'application/json', 'Authorization': 'Basic YWRtaW46Y2FjYXBpcGlkdTc5'}};
 let check_ram = {method: 'get',maxBodyLength: Infinity,url: 'https://panel.louismazin.ovh/api/client/servers/c1e3ad72/resources',headers: {"Accept": "application/json","Content-Type": "application/json","Authorization": "Bearer "+process.argv[3].toString()}};
+let maxRam  = 6.35
 const checkAndRestartServer = async () => {
     try {
         axios(check_ram)
         .then((response) => {
             data = response.data;
-            if (data.attributes.resources.memory_bytes > 6442450944) { // 6 Go en octets
+            if (data.attributes.resources.memory_bytes > maxRam*1024*1024*1024) { // 6 Go en octets
                 axios(save)
                 .then((response) => {
                     axios(restart)
@@ -20,7 +21,7 @@ const checkAndRestartServer = async () => {
                 .catch((error) => {
                     console.log(error);
                 });
-                console.log("Observer : RAM supérieure à 6.5 Go, serveur redémarré.");
+                console.log("Observer : RAM supérieure à "+maxRam+" Go, serveur redémarré.");
             }
         })
     } catch (error) {
