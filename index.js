@@ -57,7 +57,7 @@ const update = async () => {
                 console.log("Bot :"+element.name+": Updating channel name to : "+title);
               }
             })
-            .catch(error => {console.log("Bot : error on server "+element.name);});
+            .catch(error => {console.log("Bot : error on server "+element.name+" eroor :"+error);});
         });
         
     } catch (error) {
