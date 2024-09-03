@@ -53,7 +53,6 @@ const update = async () => {
             .then(channel => {
               if(channel.name != title){
                 channel.setName(title);
-                channel.update();
                 console.log("Bot :"+element.name+": Updating channel name to : "+title);
               }
             })
