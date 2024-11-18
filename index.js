@@ -1,8 +1,9 @@
 const axios = require('axios');
 require('./observer.js');
-const Discord = require('discord.js');
 
-const client = new Discord.Client({ intents: [Discord.GatewayIntentBits.GuildMessages] });
+import { Client, GatewayIntentBits } from 'discord.js';
+
+const client = new Client({ intents: [GatewayIntentBits.GuildMessages] });
 const args = process.argv;
 const token = args[2].toString();
 const headers = {
@@ -17,11 +18,11 @@ client.on('ready', () => {
   console.log('Bot started !');
   client.user.setPresence({ activities: [{ name: 'des vidéos de Rygain.', type: 'WATCHING' }], status: 'online' });
 });
-client.on('messageCreate', (message) =>{
-  console.log(message.content);
-  if(message.content.startsWith("!bienvenue")){
-    message.channel.bulkDelete(message);
-    console.log(message.content);
+client.on('interactionCreate', async interaction => {
+  if (!interaction.isChatInputCommand()) return;
+
+  if (interaction.commandName === 'bienvenue') {
+    await interaction.reply('Pong!');
   }
 });
 const update = async () => {
@@ -69,7 +70,17 @@ const update = async () => {
         console.log("Bot : "+error);
     }
 }
-
+client.on('messageCreate', (message) =>{
+  console.log("3"+message.content);
+  if(message.content.startsWith("!bienvenue")){
+    message.channel.bulkDelete(message);
+  }
+});
 client.login(token);
-
+client.on('messageCreate', (message) =>{
+  console.log("2"+message.content);
+  if(message.content.startsWith("!bienvenue")){
+    message.channel.bulkDelete(message);
+  }
+});
 setInterval(update, 60000);
