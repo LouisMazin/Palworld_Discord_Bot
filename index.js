@@ -1,7 +1,7 @@
 const axios = require('axios');
 const fs = require('node:fs');
 const path = require('node:path');
-//require('./observer.js');
+require('./observer.js');
 const update  = require('./displayer.js');
 const { Client, GatewayIntentBits, Collection, Events } = require('discord.js');
 
