@@ -3,9 +3,7 @@ const args = process.argv;
 args.shift();
 args.shift();
 const [clientId, token] = args
-console.log(clientId);
-console.log(token);
-const guildId = ["1230809896744779777","1068240252092813373"];
+const guildIds = ["1230809896744779777","1068240252092813373"];
 const fs = require('node:fs');
 const path = require('node:path');
 const commands = [];
@@ -38,10 +36,12 @@ const rest = new REST().setToken(token);
 		console.log(`Started refreshing ${commands.length} application (/) commands.`);
 
 		// The put method is used to fully refresh all commands in the guild with the current set
-		const data = await rest.put(
-			Routes.applicationGuildCommands(clientId, guildId),
-			{ body: commands },
-		);
+		for(const guildId of guildIds){
+			const data = await rest.put(
+				Routes.applicationGuildCommands(clientId, guildId),
+				{ body: commands },
+			);
+		}
 
 		console.log(`Successfully reloaded ${data.length} application (/) commands.`);
 	} catch (error) {
