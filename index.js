@@ -15,9 +15,15 @@ const numbers=["𝟎","𝟏","𝟐","𝟑","𝟒","𝟓","𝟔","𝟕","𝟖","�
 
 client.on('ready', () => {
   console.log('Bot started !');
-  client.user.setPresence({ activities: [{ name: 'les messages du serveur.', type: 'WATCHING' }], status: 'online' });
+  client.user.setPresence({ activities: [{ name: 'des vidéos de Rygain.', type: 'WATCHING' }], status: 'online' });
 });
-
+client.on('interactionCreate', message =>{
+  console.log(message.content);
+  if(message.content.startsWith("!bienvenue")){
+    message.channel.bulkDelete(message);
+    console.log(message.content);
+  }
+});
 const update = async () => {
     try {
         let state = "🔴";
