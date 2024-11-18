@@ -17,7 +17,7 @@ client.on('ready', () => {
   console.log('Bot started !');
   client.user.setPresence({ activities: [{ name: 'des vidéos de Rygain.', type: 'WATCHING' }], status: 'online' });
 });
-client.on('interactionCreate', message =>{
+client.on('messageCreate', (message) =>{
   console.log(message.content);
   if(message.content.startsWith("!bienvenue")){
     message.channel.bulkDelete(message);
