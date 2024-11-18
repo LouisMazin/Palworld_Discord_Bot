@@ -1,7 +1,9 @@
 const axios = require('axios');
-require('./observer.js');
-
-import { Client, GatewayIntentBits } from 'discord.js';
+const fs = require('node:fs');
+const path = require('node:path');
+//require('./observer.js');
+const update  = require('./displayer.js');
+const { Client, GatewayIntentBits, Collection, Events } = require('discord.js');
 
 const client = new Client({ intents: [GatewayIntentBits.GuildMessages] });
 const args = process.argv;
@@ -14,73 +16,52 @@ const headers = {
 const bot_guilds = [{"name" : "Crashtest", "infos_channel_id":"1256341578687975506"},{"name" : "Rygain", "infos_channel_id":"1263481798667796623"}];
 const numbers=["𝟎","𝟏","𝟐","𝟑","𝟒","𝟓","𝟔","𝟕","𝟖","𝟗","𝟏𝟎","𝟏𝟏","𝟏𝟐","𝟏𝟑","𝟏𝟒","𝟏𝟓","𝟏𝟔","𝟏𝟕","𝟏𝟖","𝟏𝟗","𝟐𝟎","𝟐𝟏","𝟐𝟐","𝟐𝟑","𝟐𝟒","𝟐𝟓","𝟐𝟔","𝟐𝟕","𝟐𝟖","𝟐𝟗","𝟑𝟎","𝟑𝟏","𝟑𝟐"];
 
+client.commands = new Collection();
+const foldersPath = path.join(__dirname, 'commands');
+const commandFolders = fs.readdirSync(foldersPath);
+
+for (const folder of commandFolders) {
+	const commandsPath = path.join(foldersPath, folder);
+	const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+	for (const file of commandFiles) {
+		const filePath = path.join(commandsPath, file);
+		const command = require(filePath);
+		// Set a new item in the Collection with the key as the command name and the value as the exported module
+		if ('data' in command && 'execute' in command) {
+			client.commands.set(command.data.name, command);
+		} else {
+			console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
+		}
+	}
+}
+
 client.on('ready', () => {
   console.log('Bot started !');
   client.user.setPresence({ activities: [{ name: 'des vidéos de Rygain.', type: 'WATCHING' }], status: 'online' });
 });
-client.on('interactionCreate', async interaction => {
-  if (!interaction.isChatInputCommand()) return;
 
-  if (interaction.commandName === 'bienvenue') {
-    await interaction.reply('Pong!');
-  }
-});
-const update = async () => {
-    try {
-        let state = "🔴";
-        let players = "0";
-        let config = {
-            method: 'get',
-          maxBodyLength: Infinity,
-            url: 'http://play.louismazin.ovh:1025/v1/api/metrics',
-            headers: { 
-              'Accept': 'application/json', 
-              'Authorization': 'Basic YWRtaW46Y2FjYXBpcGlkdTc5'
-            }
-          };
-          
-          axios(config)
-          .then((response) => {
-            players = response.data["currentplayernum"];
-          })
-          .catch((error) => {
-            players = "0";
-          });
+client.on(Events.InteractionCreate, async interaction => {
+	if (!interaction.isChatInputCommand()) return;
 
-        const state_reponse = await fetch("https://panel.louismazin.ovh/api/client/servers/c1e3ad72/resources", { method : "GET", headers });
-        const state_data = await state_reponse.json();
-        if(state_data["attributes"]["current_state"] === "running"){
-            state = "🟢";
-        }else{
-            state = "🔴";
-        }
-        const title = "𝐒𝐞𝐫𝐯𝐞𝐮𝐫 : "+state+" 𝐉𝐨𝐮𝐞𝐮𝐫𝐬 : "+numbers[parseInt(players)];
-        bot_guilds.forEach(element => {
-          client.channels.fetch(element.infos_channel_id)
-            .then(channel => {
-              if(channel.name != title){
-                channel.setName(title);
-                console.log("Bot :"+element.name+": Updating channel name to : "+title);
-              }
-            })
-            .catch(error => {console.log("Bot : error on server "+element.name+" eroor :"+error);});
-        });
-        
-    } catch (error) {
-        console.log("Bot : "+error);
-    }
-}
-client.on('messageCreate', (message) =>{
-  console.log("3"+message.content);
-  if(message.content.startsWith("!bienvenue")){
-    message.channel.bulkDelete(message);
-  }
+	const command = interaction.client.commands.get(interaction.commandName);
+
+	if (!command) {
+		console.error(`No command matching ${interaction.commandName} was found.`);
+		return;
+	}
+
+	try {
+		await command.execute(interaction);
+	} catch (error) {
+		console.error(error);
+		if (interaction.replied || interaction.deferred) {
+			await interaction.followUp({ content: 'There was an error while executing this command!', ephemeral: true });
+		} else {
+			await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+		}
+	}
 });
+
 client.login(token);
-client.on('messageCreate', (message) =>{
-  console.log("2"+message.content);
-  if(message.content.startsWith("!bienvenue")){
-    message.channel.bulkDelete(message);
-  }
-});
-setInterval(update, 60000);
+
+setInterval(()=>{update(headers,bot_guilds,numbers,client)}, 60000);
