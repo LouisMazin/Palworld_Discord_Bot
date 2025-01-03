@@ -6,7 +6,7 @@ require('./observer.js');
 const update  = require('./displayer.js');
 const { Client, GatewayIntentBits, Collection, Events } = require('discord.js');
 
-const client = new Client({ intents: [GatewayIntentBits.GuildMessages] });
+const client = new Client({ intents: [GatewayIntentBits.GuildMessages,GatewayIntentBits.GuildMembers] });
 const args = process.argv;
 const token = args[2].toString();
 const headers = {
@@ -35,6 +35,16 @@ for (const folder of commandFolders) {
 		}
 	}
 }
+const welcomeDM = require("./welcomeDM.json")
+
+client.on('guildMemberAdd', async member => {
+    try {
+        await member.send(welcomeDM);
+        console.log(`Message de bienvenue envoyé à ${member.user.tag}`);
+    } catch (error) {
+        console.error(`Impossible d'envoyer le message à ${member.user.tag}:`, error);
+    }
+});
 
 client.on('ready', () => {
   deploy(token);
