@@ -8,7 +8,7 @@ module.exports = {
 		.setDescription('Redémarrez le serveur Palworld Steam !'),
 	async execute(interaction) {
         console.log(interaction.member.roles.cache);
-        if(interaction.member.roles.cache.has(1308192450099286168)){
+        if(interaction.member.roles.cache.has(1308192450099286168n)){
             axios(restart)
             .then(() => {
             })
