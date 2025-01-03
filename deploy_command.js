@@ -33,7 +33,7 @@ module.exports = (token) => {
 			for(const guildId of guildIds){
 				console.log(`Started refreshing ${commands.length} application (/) commands.`);
 				const data = await rest.put(
-					Routes.applicationGuildCommands(1256304109393547305, guildId),
+					Routes.applicationGuildCommands(1256304109393547305n, guildId),
 					{ body: commands },
 				).then(data=>console.log(`Successfully reloaded ${data.length} application (/) commands.`))
 			}
