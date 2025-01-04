@@ -40,7 +40,6 @@ const welcomeDM = require("./welcomeDM.json")
 client.on('guildMemberAdd', async member => {
     try {
         await member.send(welcomeDM);
-        console.log(`Message de bienvenue envoyé à ${member.user.tag}`);
     } catch (error) {
         console.error(`Impossible d'envoyer le message à ${member.user.tag}:`, error);
     }
