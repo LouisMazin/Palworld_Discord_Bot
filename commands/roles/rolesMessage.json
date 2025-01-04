@@ -4,7 +4,7 @@
     "embeds": [
       {
         "id": 313857863,
-        "description": "# Bienvenue, \n\n## Je vois que tu es bien arrivé sur mon discord, si tu es là, j'espère que c'est grâce au message de notre , sinon, va voir tes message privés ! 😉\n## Pour pouvoir en profiter entièrement du serveur, il faut que tu sélectionnes un ou plusieurs rôles. 🤓\n\n## Ces rôles serviront surtout à pouvoir mieux t'informer/t'identifier. 😉👍🏻\n\n## Une fois que tu as choisi tes rôles, profites bien du discord et n'hésites pas à poser des questions si tu as un problème, on sera ravi de t'aider !🍻",
+        "description": "# Bienvenue, \n\n## Je vois que tu es bien arrivé sur notre serveur Discord, si tu es là, j'espère que c'est grâce au message de notre , sinon, va voir tes message privés ! 😉\n## Pour pouvoir en profiter entièrement du serveur, il faut que tu sélectionnes un ou plusieurs rôles. 🤓\n\n## Ces rôles serviront surtout à pouvoir mieux t'informer/t'identifier. 😉👍🏻\n\n## Une fois que tu as choisi tes rôles, profites bien du discord et n'hésites pas à poser des questions si tu as un problème, on sera ravi de t'aider !🍻",
         "fields": []
       }
     ],
@@ -66,7 +66,7 @@
       }
     ],
     "actions": {
-      "913949869": {
+      "xbox": {
         "actions": [
             {
                 "type": 1,
@@ -75,7 +75,7 @@
             }
         ]
       },
-      "780952136": {
+      "steam": {
         "actions": [
             {
                 "type": 1,
@@ -84,7 +84,7 @@
             }
         ]
       },
-      "885437585": {
+      "ps5": {
         "actions": [
             {
                 "type": 1,
@@ -93,7 +93,7 @@
             }
         ]
       },
-      "862977585": {
+      "member": {
         "actions": [
             {
                 "type": 1,
@@ -103,6 +103,6 @@
         ]
       }
     },
-    "username": "Rygain",
-    "avatar_url": "https://cdn.discordapp.com/avatars/604816932834770964/9a0d859872029f097d1e8454308fee1f.webp"
+    "username": "Couteau Suisse",
+    "avatar_url": "https://srv.latostadora.com/designall.dll/couteau-suisse---dessin-drole-sketchy--i:141385141697014138520;d:1416970;w:520;b:FFFFFF;m:1.jpg"
   }
