@@ -1,0 +1,104 @@
+{
+    "content": "",
+    "tts": false,
+    "embeds": [
+      {
+        "id": 313857863,
+        "description": "# Bienvenue, \n\n## Je vois que tu es bien arrivé sur mon discord, si tu es là, j'espère que c'est grâce au message de notre , sinon, va voir tes message privés ! 😉\n## Pour pouvoir en profiter entièrement du serveur, il faut que tu sélectionnes un ou plusieurs rôles. 🤓\n\n## Ces rôles serviront surtout à pouvoir mieux t'informer/t'identifier. 😉👍🏻\n\n## Une fois que tu as choisi tes rôles, profites bien du discord et n'hésites pas à poser des questions si tu as un problème, on sera ravi de t'aider !🍻",
+        "fields": []
+      }
+    ],
+    "components": [
+      {
+        "id": 208278174,
+        "type": 1,
+        "components": [
+          {
+            "id": 788266822,
+            "type": 2,
+            "style": 3,
+            "label": "Joueur Xbox",
+            "action_set_id": "913949869",
+            "emoji": {
+              "name": "🟢",
+              "animated": false
+            }
+          },
+          {
+            "id": 51967280,
+            "type": 2,
+            "style": 1,
+            "label": "Joueur Steam",
+            "action_set_id": "780952136",
+            "emoji": {
+              "name": "🔵",
+              "animated": false
+            }
+          },
+          {
+            "id": 809383785,
+            "type": 2,
+            "style": 2,
+            "label": "Joueur PS5",
+            "action_set_id": "885437585",
+            "url": "",
+            "emoji": {
+              "name": "⚪",
+              "animated": false
+            }
+          },
+          {
+            "id": 41366559,
+            "type": 2,
+            "style": 4,
+            "label": "Simple Membre",
+            "action_set_id": "862977585",
+            "emoji": {
+              "name": "🟣",
+              "animated": false
+            }
+          }
+        ]
+      }
+    ],
+    "actions": {
+      "913949869": {
+        "actions": [
+            {
+                "type": 1,
+                "target": "role",
+                "id": "1225797198609121340"
+            }
+        ]
+      },
+      "780952136": {
+        "actions": [
+            {
+                "type": 1,
+                "target": "role",
+                "id": "1227380861561864332"
+            }
+        ]
+      },
+      "885437585": {
+        "actions": [
+            {
+                "type": 1,
+                "target": "role",
+                "id": "1296436054605430814"
+            }
+        ]
+      },
+      "862977585": {
+        "actions": [
+            {
+                "type": 1,
+                "target": "role",
+                "id": "1227600279776530462"
+            }
+        ]
+      }
+    },
+    "username": "Rygain",
+    "avatar_url": "https://cdn.discordapp.com/avatars/604816932834770964/9a0d859872029f097d1e8454308fee1f.webp"
+  }
