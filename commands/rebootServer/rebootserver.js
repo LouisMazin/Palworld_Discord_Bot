@@ -7,10 +7,7 @@ module.exports = {
 		.setName('rebootserver')
 		.setDescription('Redémarrez le serveur Palworld Steam !'),
 	async execute(interaction) {
-        membre = interaction.member
-        roles = membre.roles
-        rolecache = roles
-        if (rolecache.some(role => role.name === 'Modo' || role.name== 'Boss')) {
+        if (interaction.member.user.id==="391708236698615809") {
             axios(restart)
             .then(() => {
             interaction.reply("Le serveur redémarre ! 🔄")
