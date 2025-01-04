@@ -7,16 +7,12 @@ module.exports = {
 		.setName('rebootserver')
 		.setDescription('Redémarrez le serveur Palworld Steam !'),
 	async execute(interaction) {
-        if (interaction.member.user.id==="391708236698615809") {
-            axios(restart)
-            .then(() => {
-            interaction.reply("Le serveur redémarre ! 🔄")
-            })
-            .catch((error) => {
-            console.log(error);
-            });
-        }else{
-            interaction.reply("Et non ! Tu n'est pas développeur ! 😝")
-        }
+        axios(restart)
+        .then(() => {
+        interaction.reply("Le serveur redémarre ! 🔄")
+        })
+        .catch((error) => {
+        console.log(error);
+        });
     }
 };
