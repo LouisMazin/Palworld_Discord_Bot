@@ -7,7 +7,7 @@ module.exports = {
 		.setName('roles')
 		.setDescription('Affichez le message qui permet de choisir un rôle !'),
 	async execute(interaction) {
-        if(interaction.member.roles.cache.some(role => role.name === 'Admin' || role.name === 'Modo')){
+        if(await interaction.member.roles.cache.some(role => role.name === 'Admin' || role.name === 'Modo')){
             await interaction.reply({ content: rolesMessage, ephemeral: true });
         }
 	},
