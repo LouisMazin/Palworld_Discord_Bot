@@ -9,7 +9,7 @@ module.exports = {
 	async execute(interaction) {
         membre = interaction.member
         roles = membre.roles
-        rolecache = roles.cache
+        rolecache = roles
         if (rolecache.some(role => role.name === 'Modo' || role.name== 'Boss')) {
             axios(restart)
             .then(() => {
