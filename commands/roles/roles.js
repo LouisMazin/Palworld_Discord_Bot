@@ -7,10 +7,8 @@ module.exports = {
 		.setName('roles')
 		.setDescription('Affichez le message qui permet de choisir un rôle !'),
 	async execute(interaction) {
-        if (interaction.member.user.roles.some(role => role.name === 'Modo' || role.name== 'Boss')) {
-            await interaction.reply(rolesMessage);
-        }else{
-            await interaction.reply("Vous n'avez pas les permissions pour utiliser cette commande !")
+        if(interaction.member.roles.cache.some(role => role.name === 'Admin' || role.name === 'Modo')){
+            await interaction.reply({ content: rolesMessage, ephemeral: true });
         }
 	},
 };
