@@ -8,6 +8,7 @@ module.exports = {
 		.setDescription('Affichez le message qui permet de choisir un rôle !'),
 	async execute(interaction) {
         const memberTarget = interaction.guild.members.cache.get(interaction.member.user.id);
+        console.log(memberTarget);
         if (memberTarget.roles.cache.some(role => role.name === 'Modo' || role.name== 'Boss')) {
             await interaction.reply(rolesMessage);
         }else{
