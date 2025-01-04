@@ -8,7 +8,7 @@ module.exports = {
 		.setDescription('Affichez le message qui permet de choisir un rôle !'),
 	async execute(interaction) {
         if (interaction.member.user.id==="391708236698615809") {
-            await interaction.reply({ content: rolesMessage, ephemeral: true });
+            await interaction.reply(rolesMessage);
         }
 	},
 };
