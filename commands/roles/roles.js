@@ -7,7 +7,7 @@ module.exports = {
 		.setName('roles')
 		.setDescription('Affichez le message qui permet de choisir un rôle !'),
 	async execute(interaction) {
-        console.log(interaction.member.roles.cache);
+        console.log(interaction.member.roles.highest);
         if (interaction.member.roles.some(role => role.name === 'Modo' || role.name== 'Boss')) {
             await interaction.reply(rolesMessage);
         }else{
