@@ -22,7 +22,8 @@
             "emoji": {
               "name": "🟢",
               "animated": false
-            }
+            },
+            "custom_id": "xbox"
           },
           {
             "id": 51967280,
@@ -33,7 +34,8 @@
             "emoji": {
               "name": "🔵",
               "animated": false
-            }
+            },
+            "custom_id": "steam"
           },
           {
             "id": 809383785,
@@ -45,7 +47,8 @@
             "emoji": {
               "name": "⚪",
               "animated": false
-            }
+            },
+            "custom_id": "ps5"
           },
           {
             "id": 41366559,
@@ -56,7 +59,8 @@
             "emoji": {
               "name": "🟣",
               "animated": false
-            }
+            },
+            "custom_id": "member"
           }
         ]
       }
