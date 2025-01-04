@@ -47,8 +47,8 @@ client.on('guildMemberAdd', async member => {
 });
 
 client.on('ready', () => {
-  deploy(token);
   console.log('Bot started !');
+  deploy(token);
   client.user.setPresence({ activities: [{ name: 'des vidéos de Rygain.', type: 'WATCHING' }], status: 'online' });
 });
 
