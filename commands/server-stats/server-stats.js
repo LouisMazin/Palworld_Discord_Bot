@@ -32,7 +32,7 @@ const getPlayersNumberAndFPS = (platform) => {
 }
 const getPlayers = (platform) => {
     return new Promise((resolve, reject) => {
-        let infos = "## Joueurs connectés : \n";
+        let infos = "";
         const port = platform === 'Steam' ? '1025' : platform === 'Xbox' ? '1032' : '';
         
         if(port === '') {
@@ -52,7 +52,7 @@ const getPlayers = (platform) => {
         .then((response) => {
             const players = Object.entries(response.data.players);
             if (players.length === 0) {
-                resolve("");
+                resolve(infos);
                 return;
             }
             for(const player of players) {
