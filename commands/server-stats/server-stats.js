@@ -25,7 +25,6 @@ getStats = (platform) => {
         })
         .catch((error) => {
             return ""
-        console.log(error);
         });
     });
 }
@@ -44,7 +43,7 @@ module.exports = {
 	async execute(interaction) {
 		const platform = interaction.options.getString('plateforme');
 		
-		infos = getStats(platform);
+		infos = await getStats(platform);
 		await interaction.reply(infos);
 	},
 };
