@@ -1,5 +1,7 @@
 const axios = require('axios');
 const { SlashCommandBuilder } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
+
 
 const getPlayersNumberAndFPS = (platform) => {
     return new Promise((resolve, reject) => {
@@ -113,11 +115,14 @@ module.exports = {
 	async execute(interaction) {
         try {
             const platform = interaction.options.getString('plateforme');
-            const title = "# Informations sur le Serveur Palworld "+platform+" : \n";
             const infos = await getPlayersNumberAndFPS(platform);
             const params = await getParams(platform);
             const players = await getPlayers(platform);
-            await interaction.reply(title+"\n"+infos+(players==="" ? "" : players+"\n")+'\n'+params);
+            const message = new MessageEmbed()
+                .setColor('#0099ff')
+                .setTitle('Informations sur le Serveur Palworld '+platform)
+                .setDescription(infos+(players==="" ? "" : players+"\n")+'\n'+params);
+            await interaction.reply(message);
         } catch (error) {
             await interaction.reply({ content: "Une erreur est survenue : " + error, ephemeral: true });
         }
