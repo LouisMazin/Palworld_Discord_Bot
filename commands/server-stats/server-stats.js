@@ -87,7 +87,6 @@ const getParams = (platform) => {
         .then((response) => {
             const params = Object.entries(response.data);
             for(const [key, value] of params) {
-                console.log(key);
                 if(['Difficulty', 'DeathPenalty','bEnableInvaderEnemy','BaseCampMaxNum','BaseCampWorkerMaxNum','PalEggDefaultHatchingTime'].indexOf(key) !== -1) {
                     infos += "### - "+key+" : "+value+'\n';
                 }
@@ -118,7 +117,7 @@ module.exports = {
             const infos = await getPlayersNumberAndFPS(platform);
             const params = await getParams(platform);
             const players = await getPlayers(platform);
-            await interaction.reply(title+"\n"+infos+players==="" ? "" : players+"\n"+'\n'+params);
+            await interaction.reply(title+"\n"+infos+(players==="" ? "" : players+"\n")+'\n'+params);
         } catch (error) {
             await interaction.reply({ content: "Une erreur est survenue : " + error, ephemeral: true });
         }
