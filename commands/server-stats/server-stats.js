@@ -1,33 +1,36 @@
-// Affiche les stats su serveur Palworld (joueurs en ligne, paramètres..)
 const axios = require('axios');
 const { SlashCommandBuilder } = require('discord.js');
-// const statsMessage = require("./statsMessage.json");
-getStats = (platform) => {
-    var infos = "";
+
+const getStats = (platform) => {
     return new Promise((resolve, reject) => {
-        const port = platform === 'steam' ? '1025' : platform === 'xbox' ?'1032' : '';
+        let infos = "";
+        const port = platform === 'steam' ? '1025' : platform === 'xbox' ? '1032' : '';
+        
         if(port === '') {
             reject('Invalid platform');
+            return;
         }
+
         axios({
             method: 'get',
             maxBodyLength: Infinity,
             url: 'http://play.louismazin.ovh:'+port+'/v1/api/metrics',
             headers: { 
-              'Accept': 'application/json', 
-              'Authorization': 'Basic YWRtaW46Y2FjYXBpcGlkdTc5'
+                'Accept': 'application/json', 
+                'Authorization': 'Basic YWRtaW46Y2FjYXBpcGlkdTc5'
             }
-          })
+        })
         .then((response) => {
             infos += "## Nombre de joueurs connectés : "+response.data["currentplayernum"]+'\n';
             infos += "## FPS du Serveur : "+response.data["serverfps"]+'\n';
-            return infos;
+            resolve(infos);
         })
         .catch((error) => {
-            return ""
+            reject("Erreur lors de la récupération des données : " + error);
         });
     });
 }
+
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('server-stats')
@@ -41,9 +44,12 @@ module.exports = {
 					{ name: 'Xbox', value: 'xbox' },
 				)),
 	async execute(interaction) {
-		const platform = interaction.options.getString('plateforme');
-		
-		infos = await getStats(platform);
-		await interaction.reply(infos);
+        try {
+            const platform = interaction.options.getString('plateforme');
+            const infos = await getStats(platform);
+            await interaction.reply(infos);
+        } catch (error) {
+            await interaction.reply({ content: "Une erreur est survenue : " + error, ephemeral: true });
+        }
 	},
 };
