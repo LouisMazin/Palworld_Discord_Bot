@@ -55,7 +55,7 @@ const getParams = (platform) => {
             for(const [key, value] of params) {
                 infos += "## "+key+" : "+value+'\n';
             }
-            resolve(infos);
+            resolve(JSON.stringify(response.data));
         })
         .catch((error) => {
             reject("Erreur lors de la récupération des données : " + error);
