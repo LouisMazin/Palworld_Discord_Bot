@@ -3,6 +3,7 @@ const axios = require('axios');
 const { SlashCommandBuilder } = require('discord.js');
 // const statsMessage = require("./statsMessage.json");
 getStats = (platform) => {
+    var infos = "";
     return new Promise((resolve, reject) => {
         const port = platform === 'steam' ? '1025' : platform === 'xbox' ?'1032' : '';
         if(port === '') {
@@ -18,7 +19,10 @@ getStats = (platform) => {
             }
           })
         .then((response) => {
-        console.log(response.data);
+            infos += "## Nombre de joueurs connectés : "+response.data["currentplayernum"]+'\n';
+            infos += "## FPS du Serveur : "+response.data["serverfps"]+'\n';
+            console.log(infos);
+            resolve(infos);
         })
         .catch((error) => {
         console.log(error);
