@@ -8,7 +8,15 @@ getStats = (platform) => {
         if(port === '') {
             reject('Invalid platform');
         }
-        axios('http://play.louismazin.ovh:'+port+'/v1/api/metrics')
+        axios({
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: 'http://play.louismazin.ovh:'+port+'/v1/api/metrics',
+            headers: { 
+              'Accept': 'application/json', 
+              'Authorization': 'Basic YWRtaW46Y2FjYXBpcGlkdTc5'
+            }
+          })
         .then((response) => {
         console.log(response);
         })
