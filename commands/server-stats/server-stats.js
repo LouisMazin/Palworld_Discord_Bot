@@ -1,7 +1,6 @@
 const axios = require('axios');
 const { SlashCommandBuilder } = require('discord.js');
-const { MessageEmbed } = require('discord.js');
-
+const { EmbedBuilder } = require('discord.js');
 
 const getPlayersNumberAndFPS = (platform) => {
     return new Promise((resolve, reject) => {
@@ -118,8 +117,9 @@ module.exports = {
             const infos = await getPlayersNumberAndFPS(platform);
             const params = await getParams(platform);
             const players = await getPlayers(platform);
-            const message = new MessageEmbed()
+            const message = new EmbedBuilder()
                 .setColor('#0099ff')
+                .setAuthor({ name: 'Couteau Suisse', iconURL: 'https://srv.latostadora.com/designall.dll/couteau-suisse---dessin-drole-sketchy--i:141385141697014138520;d:1416970;w:520;b:FFFFFF;m:1.jpg'})
                 .setTitle('Informations sur le Serveur Palworld '+platform)
                 .setDescription(infos+(players==="" ? "" : players+"\n")+'\n'+params);
             await interaction.reply(message);
