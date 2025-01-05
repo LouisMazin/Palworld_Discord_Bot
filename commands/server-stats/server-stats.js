@@ -56,6 +56,7 @@ const getPlayers = (platform) => {
                 return;
             }
             for(const player of players) {
+                console.log(player);
                 infos += "### - "+player+'\n';
             }
             resolve(infos);
