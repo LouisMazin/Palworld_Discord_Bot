@@ -4,7 +4,7 @@ const { SlashCommandBuilder } = require('discord.js');
 const getPlayersAndFPS = (platform) => {
     return new Promise((resolve, reject) => {
         let infos = "";
-        const port = platform === 'steam' ? '1025' : platform === 'xbox' ? '1032' : '';
+        const port = platform === 'Steam' ? '1025' : platform === 'Xbox' ? '1032' : '';
         
         if(port === '') {
             reject('Invalid platform');
@@ -32,8 +32,8 @@ const getPlayersAndFPS = (platform) => {
 }
 const getParams = (platform) => {
     return new Promise((resolve, reject) => {
-        let infos = "";
-        const port = platform === 'steam' ? '1025' : platform === 'xbox' ? '1032' : '';
+        let infos = "## Paramètres du Serveur : \n";
+        const port = platform === 'Steam' ? '1025' : platform === 'Xbox' ? '1032' : '';
         
         if(port === '') {
             reject('Invalid platform');
@@ -50,12 +50,14 @@ const getParams = (platform) => {
             }
         })
         .then((response) => {
-            // response.data is a dict, so I want a list of key-value pairs
-            // const params = Object.entries(response.data);
-            // for(const [key, value] of params) {
-            //     infos += "## "+key+" : "+value+'\n';
-            // }
-            resolve(JSON.stringify(response.data));
+            const params = Object.entries(response.data);
+            for(const [key, value] of params) {
+                console.log(key);
+                if(['Difficulty', 'DeathPenalty','bEnableInvaderEnemy','BaseCampMaxNum','BaseCampWorkerMaxNum','PalEggDefaultHatchingTime'].indexOf(key) !== -1) {
+                    infos += "### - "+key+" : "+value+'\n';
+                }
+            }
+            resolve(infos);
         })
         .catch((error) => {
             reject("Erreur lors de la récupération des données : " + error);
@@ -71,15 +73,16 @@ module.exports = {
 				.setDescription('Choisissez votre plateforme')
 				.setRequired(true)
 				.addChoices(
-					{ name: 'Steam', value: 'steam' },
-					{ name: 'Xbox', value: 'xbox' },
+					{ name: 'Steam', value: 'Steam' },
+					{ name: 'Xbox', value: 'Xbox' },
 				)),
 	async execute(interaction) {
         try {
             const platform = interaction.options.getString('plateforme');
+            const title = "# Informations sur le Serveur Palworld "+platform+" : \n";
             const infos = await getPlayersAndFPS(platform);
             const params = await getParams(platform);
-            await interaction.reply(infos+'\n'+params);
+            await interaction.reply(title+"\n"+infos+'\n'+params);
         } catch (error) {
             await interaction.reply({ content: "Une erreur est survenue : " + error, ephemeral: true });
         }
