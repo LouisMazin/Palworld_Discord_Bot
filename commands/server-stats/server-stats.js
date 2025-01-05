@@ -21,9 +21,10 @@ getStats = (platform) => {
         .then((response) => {
             infos += "## Nombre de joueurs connectés : "+response.data["currentplayernum"]+'\n';
             infos += "## FPS du Serveur : "+response.data["serverfps"]+'\n';
-            resolve(infos);
+            return infos;
         })
         .catch((error) => {
+            return ""
         console.log(error);
         });
     });
