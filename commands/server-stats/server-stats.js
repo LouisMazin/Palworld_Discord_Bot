@@ -1,9 +1,7 @@
 // Affiche les stats su serveur Palworld (joueurs en ligne, paramètres..)
-
+const axios = require('axios');
 const { SlashCommandBuilder } = require('discord.js');
 // const statsMessage = require("./statsMessage.json");
-const { get } = require('http');
-// lambda function
 getStats = (platform) => {
     return new Promise((resolve, reject) => {
         const port = platform === 'steam' ? '1025' : platform === 'xbox' ?'1032' : '';
