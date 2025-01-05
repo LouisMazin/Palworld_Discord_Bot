@@ -50,13 +50,13 @@ const getPlayers = (platform) => {
             }
         })
         .then((response) => {
-            const params = Object.entries(response.data);
-            if (params.length === 0) {
+            const players = Object.entries(response.data.players);
+            if (players.length === 0) {
                 resolve("");
                 return;
             }
-            for(const [key, value] of params) {
-                infos += "### - "+key+" : "+value+'\n';
+            for(const player of players) {
+                infos += "### - "+player+'\n';
             }
             resolve(infos);
         })
