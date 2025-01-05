@@ -119,7 +119,7 @@ module.exports = {
             const players = await getPlayers(platform);
             const message = new EmbedBuilder()
                 .setColor('#0099ff')
-                .setAuthor({ name: 'Couteau Suisse', iconURL: 'https://srv.latostadora.com/designall.dll/couteau-suisse---dessin-drole-sketchy--i:141385141697014138520;d:1416970;w:520;b:FFFFFF;m:1.jpg', url: 'louismazin.ovh'})
+                // .setAuthor({ name: 'Couteau Suisse', iconURL: 'https://srv.latostadora.com/designall.dll/couteau-suisse---dessin-drole-sketchy--i:141385141697014138520;d:1416970;w:520;b:FFFFFF;m:1.jpg', url: 'louismazin.ovh'})
                 .setTitle('Informations sur le Serveur Palworld '+platform)
                 .setDescription(infos+(players==="" ? "" : players+"\n")+'\n'+params);
             await interaction.reply(message);
