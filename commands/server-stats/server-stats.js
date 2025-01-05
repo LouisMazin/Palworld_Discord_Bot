@@ -1,7 +1,7 @@
 // Affiche les stats su serveur Palworld (joueurs en ligne, paramètres..)
 
 const { SlashCommandBuilder } = require('discord.js');
-const statsMessage = require("./statsMessage.json");
+// const statsMessage = require("./statsMessage.json");
 const { get } = require('http');
 // lambda function
 getStats = (platform) => {
