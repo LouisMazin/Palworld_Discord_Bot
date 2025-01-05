@@ -21,7 +21,6 @@ getStats = (platform) => {
         .then((response) => {
             infos += "## Nombre de joueurs connectés : "+response.data["currentplayernum"]+'\n';
             infos += "## FPS du Serveur : "+response.data["serverfps"]+'\n';
-            console.log(infos);
             resolve(infos);
         })
         .catch((error) => {
@@ -44,8 +43,7 @@ module.exports = {
 	async execute(interaction) {
 		const platform = interaction.options.getString('plateforme');
 		
-		getStats(platform);
-		
-		// await interaction.reply(message);
+		infos = getStats(platform);
+		await interaction.reply(infos);
 	},
 };
