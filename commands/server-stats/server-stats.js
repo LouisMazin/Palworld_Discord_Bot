@@ -51,10 +51,10 @@ const getParams = (platform) => {
         })
         .then((response) => {
             // response.data is a dict, so I want a list of key-value pairs
-            const params = Object.entries(response.data);
-            for(const [key, value] of params) {
-                infos += "## "+key+" : "+value+'\n';
-            }
+            // const params = Object.entries(response.data);
+            // for(const [key, value] of params) {
+            //     infos += "## "+key+" : "+value+'\n';
+            // }
             resolve(JSON.stringify(response.data));
         })
         .catch((error) => {
