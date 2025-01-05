@@ -122,7 +122,7 @@ module.exports = {
                 // .setAuthor({ name: 'Couteau Suisse', iconURL: 'https://srv.latostadora.com/designall.dll/couteau-suisse---dessin-drole-sketchy--i:141385141697014138520;d:1416970;w:520;b:FFFFFF;m:1.jpg', url: 'louismazin.ovh'})
                 .setTitle('Informations sur le Serveur Palworld '+platform)
                 .setDescription(infos+(players==="" ? "" : players+"\n")+'\n'+params);
-            await interaction.reply(message);
+            await interaction.reply({ embeds: [message] });
         } catch (error) {
             await interaction.reply({ content: "Une erreur est survenue : " + error, ephemeral: true });
         }
