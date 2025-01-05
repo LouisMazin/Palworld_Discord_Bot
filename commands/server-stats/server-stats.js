@@ -21,8 +21,8 @@ const getPlayersNumberAndFPS = (platform) => {
             }
         })
         .then((response) => {
-            infos += "## Nombre de joueurs connectés : "+response.data["currentplayernum"]+'\n';
             infos += "## FPS du Serveur : "+response.data["serverfps"]+'\n';
+            infos += "## Nombre de joueurs connectés : "+response.data["currentplayernum"]+'\n';
             resolve(infos);
         })
         .catch((error) => {
@@ -109,7 +109,6 @@ module.exports = {
 				.setRequired(true)
 				.addChoices(
 					{ name: 'Steam', value: 'Steam' },
-					{ name: 'Xbox', value: 'Xbox' },
 				)),
 	async execute(interaction) {
         try {
