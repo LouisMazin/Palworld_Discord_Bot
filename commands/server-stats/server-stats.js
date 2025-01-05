@@ -8,7 +8,7 @@ getStats = (platform) => {
         if(port === '') {
             reject('Invalid platform');
         }
-        axios('http://play.louismazin.ovh:'+port+'/v1/api/stats/')
+        axios('http://play.louismazin.ovh:'+port+'/v1/api/metrics')
         .then((response) => {
         console.log(response);
         })
