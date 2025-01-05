@@ -1,7 +1,7 @@
 const axios = require('axios');
 const { SlashCommandBuilder } = require('discord.js');
 
-const getPlayersAndFPS = (platform) => {
+const getPlayersNumberAndFPS = (platform) => {
     return new Promise((resolve, reject) => {
         let infos = "";
         const port = platform === 'Steam' ? '1025' : platform === 'Xbox' ? '1032' : '';
@@ -23,6 +23,41 @@ const getPlayersAndFPS = (platform) => {
         .then((response) => {
             infos += "## Nombre de joueurs connectés : "+response.data["currentplayernum"]+'\n';
             infos += "## FPS du Serveur : "+response.data["serverfps"]+'\n';
+            resolve(infos);
+        })
+        .catch((error) => {
+            reject("Erreur lors de la récupération des données : " + error);
+        });
+    });
+}
+const getPlayers = (platform) => {
+    return new Promise((resolve, reject) => {
+        let infos = "## Joueurs connectés : \n";
+        const port = platform === 'Steam' ? '1025' : platform === 'Xbox' ? '1032' : '';
+        
+        if(port === '') {
+            reject('Invalid platform');
+            return;
+        }
+
+        axios({
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: 'http://play.louismazin.ovh:'+port+'/v1/api/settings',
+            headers: { 
+                'Accept': 'application/json', 
+                'Authorization': 'Basic YWRtaW46Y2FjYXBpcGlkdTc5'
+            }
+        })
+        .then((response) => {
+            const params = Object.entries(response.data);
+            if (params.length === 0) {
+                resolve("");
+                return;
+            }
+            for(const [key, value] of params) {
+                infos += "### - "+key+" : "+value+'\n';
+            }
             resolve(infos);
         })
         .catch((error) => {
@@ -80,9 +115,10 @@ module.exports = {
         try {
             const platform = interaction.options.getString('plateforme');
             const title = "# Informations sur le Serveur Palworld "+platform+" : \n";
-            const infos = await getPlayersAndFPS(platform);
+            const infos = await getPlayersNumberAndFPS(platform);
             const params = await getParams(platform);
-            await interaction.reply(title+"\n"+infos+'\n'+params);
+            const players = await getPlayers(platform);
+            await interaction.reply(title+"\n"+infos+players==="" ? "" : players+"\n"+'\n'+params);
         } catch (error) {
             await interaction.reply({ content: "Une erreur est survenue : " + error, ephemeral: true });
         }
