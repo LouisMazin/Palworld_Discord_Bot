@@ -57,7 +57,7 @@ const getPlayers = (platform) => {
             }
             for(const player of players) {
                 const joueur = player[1];
-                infos += "### - "+joueur.name+' niveau '+joueur.level+' '+joueur.ping+' ms\n';
+                infos += "### - "+joueur.name+' niveau '+joueur.level+' ping : '+Math.round(joueur.ping)+'ms\n';
             }
             resolve(infos);
         })
