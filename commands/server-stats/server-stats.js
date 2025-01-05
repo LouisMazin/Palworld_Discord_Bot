@@ -43,7 +43,7 @@ const getPlayers = (platform) => {
         axios({
             method: 'get',
             maxBodyLength: Infinity,
-            url: 'http://play.louismazin.ovh:'+port+'/v1/api/settings',
+            url: 'http://play.louismazin.ovh:'+port+'/v1/api/players',
             headers: { 
                 'Accept': 'application/json', 
                 'Authorization': 'Basic YWRtaW46Y2FjYXBpcGlkdTc5'
