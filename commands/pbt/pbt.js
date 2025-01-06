@@ -11,7 +11,8 @@ module.exports = {
 				.setDescription('Utilisateur à mentionner')
 				.setRequired(false)),
 	async execute(interaction) {
-		programMessage.content = "||<@"+interaction.options.getUser('user').id+">||";
+		userId = interaction.options.getUser('user').id;
+		programMessage.content = userId ? "||<@"+userId+">||" : "";
 		await interaction.reply(programMessage);
 	},
 };
