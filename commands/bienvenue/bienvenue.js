@@ -11,7 +11,7 @@ module.exports = {
 				.setDescription('Utilisateur à mentionner')
 				.setRequired(false)),
 	async execute(interaction) {
-		welcomeMessage.content = interaction.options.getUser('user');
+		welcomeMessage.content = "||<@"+interaction.options.getUser('user').id+">||";
 		await interaction.reply(welcomeMessage);
 	},
 };
