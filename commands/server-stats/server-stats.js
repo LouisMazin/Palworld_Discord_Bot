@@ -120,7 +120,7 @@ module.exports = {
             const players = await getPlayers(platform);
             const message = new EmbedBuilder()
                 .setColor('#0099ff')
-                .setDescription('# Informations sur le Serveur Palworld '+platforminfos+"\n"+(players==="" ? "" : players+"\n")+'\n'+params);
+                .setDescription('# Informations sur le Serveur Palworld '+platform+"\n"+infos+(players==="" ? "" : players+"\n")+'\n'+params);
             await interaction.reply({ embeds: [message] });
         } catch (error) {
             await interaction.reply({ content: "Une erreur est survenue : " + error, ephemeral: true });
