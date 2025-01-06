@@ -11,8 +11,7 @@ module.exports = {
 				.setDescription('Utilisateur à mentionner')
 				.setRequired(false)),
 	async execute(interaction) {
-		const message = JSON.parse(welcomeMessage);
-		message.content = interaction.options.getUser('user');
-		await interaction.reply(JSON.stringify(welcomeMessage));
+		welcomeMessage.content = interaction.options.getUser('user');
+		await interaction.reply(welcomeMessage);
 	},
 };
