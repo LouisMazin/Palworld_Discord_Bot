@@ -122,11 +122,11 @@ module.exports = {
             const infos = await getPlayersNumberAndFPS(platform);
             const params = await getParams(platform);
             const players = await getPlayers(platform);
+            const user = interaction.options.getUser('user')
             const message = new EmbedBuilder()
                 .setColor('#0099ff')
-                .setDescription("||<@"+interaction.options.getUser('user').id+">||")
                 .setDescription('# Informations sur le Serveur Palworld '+platform+"\n"+infos+(players==="" ? "" : players+"\n")+'\n'+params);
-            await interaction.reply({ embeds: [message] });
+            await interaction.reply({ content: (user ? "||<@"+interaction.options.getUser('user').id+">||\n" : null), embeds: [message] });
         } catch (error) {
             await interaction.reply({ content: "Une erreur est survenue : " + error, ephemeral: true });
         }
