@@ -90,7 +90,7 @@ const getParams = (platform) => {
             const paramNames = {'Difficulty': 'Difficulté', 'DeathPenalty': 'Pénalité de mort', 'bEnableInvaderEnemy': 'Ennemis envahisseurs', 'BaseCampMaxNumInGuild': 'Nombre max de camps par guilde', 'BaseCampWorkerMaxNum': 'Nombre max de pals par camp'}
             const params = Object.entries(response.data);
             for(const [key, value] of params) {
-                if(paramNames.key.indexOf(key) !== -1) {
+                if(Object.keys(paramNames).indexOf(key) !== -1) {
                     infos += "### - "+paramNames[key]+' : '+value+'\n';
                 }
             }
