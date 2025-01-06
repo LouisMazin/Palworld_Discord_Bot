@@ -1,6 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
 const programMessage = require("./programMessage.json")
 
+
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('pbt')
@@ -10,8 +11,7 @@ module.exports = {
 				.setDescription('Utilisateur à mentionner')
 				.setRequired(false)),
 	async execute(interaction) {
-		const user = interaction.options.getUser('user');
-		const message = user ? `||<@${user.id}>|| ${programMessage}` : programMessage;
-		await interaction.reply(message);
+		programMessage.content = "||<@"+interaction.options.getUser('user').id+">||";
+		await interaction.reply(programMessage);
 	},
 };

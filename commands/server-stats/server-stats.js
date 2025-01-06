@@ -112,26 +112,20 @@ module.exports = {
 				.addChoices(
 					{ name: 'Steam', value: 'Steam' },
 				))
-		.addUserOption(option =>
-			option.setName('user')
-				.setDescription('Utilisateur à mentionner')
-				.setRequired(false)),
+        .addUserOption(option =>
+            option.setName('user')
+                .setDescription('Utilisateur à mentionner')
+                .setRequired(false)),
 	async execute(interaction) {
         try {
             const platform = interaction.options.getString('plateforme');
-            const user = interaction.options.getUser('user');
             const infos = await getPlayersNumberAndFPS(platform);
             const params = await getParams(platform);
             const players = await getPlayers(platform);
-            let description = '# Informations sur le Serveur Palworld '+platform+"\n"+infos+(players==="" ? "" : players+"\n")+'\n'+params;
-            
-            if (user) {
-                description = `||<@${user.id}>|| \n${description}`;
-            }
-            
             const message = new EmbedBuilder()
                 .setColor('#0099ff')
-                .setDescription(description);
+                .setDescription("||<@"+interaction.options.getUser('user').id+">||")
+                .setDescription('# Informations sur le Serveur Palworld '+platform+"\n"+infos+(players==="" ? "" : players+"\n")+'\n'+params);
             await interaction.reply({ embeds: [message] });
         } catch (error) {
             await interaction.reply({ content: "Une erreur est survenue : " + error, ephemeral: true });
