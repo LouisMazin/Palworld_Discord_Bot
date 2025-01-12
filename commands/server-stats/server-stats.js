@@ -130,7 +130,7 @@ module.exports = {
             const message = new EmbedBuilder()
                 .setColor('#0099ff')
                 .setDescription('# Informations sur le Serveur Palworld '+platform+"\n"+infos+(players==="" ? "" : players+"\n")+'\n'+params);
-            await interaction.reply({ content: (user ? "||<@"+interaction.options.getUser('user').id+">||\n" : null), embeds: [message] });
+            await interaction.resolve({ content: (user ? "||<@"+interaction.options.getUser('user').id+">||\n" : null), embeds: [message] });
         } catch (error) {
             await interaction.reply({ content: "Une erreur est survenue : " + error, ephemeral: true });
         }
