@@ -30,9 +30,9 @@ const update = async (headers,bot_guilds,numbers,client,ip,idServer,platform) =>
         }else{
             state = "🔴";
         }
-        const title = "𝐒𝐞𝐫𝐯𝐞𝐮𝐫 : "+state+" 𝐉𝐨𝐮𝐞𝐮𝐫𝐬 : "+numbers[parseInt(players)];
+        const title = platform+" : "+state+" 𝐉𝐨𝐮𝐞𝐮𝐫𝐬 : "+numbers[parseInt(players)];
         bot_guilds.forEach(element => {
-          client.channels.fetch(platform === "Steam" ? element.steam : element.xbox)
+          client.channels.fetch(platform === "𝐒𝐭𝐞𝐚𝐦" ? element.steam : element.xbox)
             .then(channel => {
               if(channel.name != title){
                 channel.setName(title);
