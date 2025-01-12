@@ -23,7 +23,7 @@ const update = async (headers,bot_guilds,numbers,client,ip,idServer,platform) =>
             players = "0";
           });
 
-        const state_reponse = await fetch("https://panel.louismazin.ovh/api/client/servers/"+idServer+"/resources", { method : "GET", headers });
+        const state_reponse = await fetch("https://panel.louismazin.ovh:"+platform === "𝐒𝐭𝐞𝐚𝐦" ? "8212" : "8213" +"/api/client/servers/"+idServer+"/resources", { method : "GET", headers });
         const state_data = await state_reponse.json();
         if(state_data["attributes"]["current_state"] === "running"){
             state = "🟢";
