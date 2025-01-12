@@ -27,7 +27,8 @@ const getPlayersNumberAndFPS = (platform) => {
             resolve(infos);
         })
         .catch((error) => {
-            reject("Erreur lors de la récupération des données : " + error);
+            console.log("Erreur lors de la récupération des données : " + error);
+            reject("Le serveur est hors ligne.");
         });
     });
 }
@@ -63,7 +64,8 @@ const getPlayers = (platform) => {
             resolve(infos);
         })
         .catch((error) => {
-            reject("Erreur lors de la récupération des données : " + error);
+            console.log("Erreur lors de la récupération des données : " + error);
+            reject("Le serveur est hors ligne.");
         });
     });
 }
@@ -97,7 +99,8 @@ const getParams = (platform) => {
             resolve(infos);
         })
         .catch((error) => {
-            reject("Erreur lors de la récupération des données : " + error);
+            console.log("Erreur lors de la récupération des données : " + error);
+            reject("Le serveur est hors ligne.");
         });
     });
 }
