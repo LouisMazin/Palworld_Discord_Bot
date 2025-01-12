@@ -13,7 +13,7 @@ const headers = {
     "Content-Type": "application/json",
     "Authorization": "Bearer "+args[3].toString()
 };
-const bot_guilds = [{"name" : "Crashtest", "infos_channel_id":"1256341578687975506"},{"name" : "Rygain", "infos_channel_id":"1263481798667796623"}];
+const bot_guilds = [{"name" : "Crashtest", "steam":"1256341578687975506", "xbox": ""},{"name" : "Rygain", "steam":"1263481798667796623", "xbox":""}];
 const numbers=["𝟎","𝟏","𝟐","𝟑","𝟒","𝟓","𝟔","𝟕","𝟖","𝟗","𝟏𝟎","𝟏𝟏","𝟏𝟐","𝟏𝟑","𝟏𝟒","𝟏𝟓","𝟏𝟔","𝟏𝟕","𝟏𝟖","𝟏𝟗","𝟐𝟎","𝟐𝟏","𝟐𝟐","𝟐𝟑","𝟐𝟒","𝟐𝟓","𝟐𝟔","𝟐𝟕","𝟐𝟖","𝟐𝟗","𝟑𝟎","𝟑𝟏","𝟑𝟐"];
 
 client.commands = new Collection();
@@ -75,4 +75,5 @@ client.on(Events.InteractionCreate, async interaction => {
 
 client.login(token);
 
-setInterval(()=>{update(headers,bot_guilds,numbers,client)}, 60000);
+setInterval(()=>{update(headers,bot_guilds,numbers,client,"play.louismazin.ovh:1025","6ac31481","Steam")}, 60000);
+setInterval(()=>{update(headers,bot_guilds,numbers,client,"play.louismazin.ovh:1035","6d14413b","Xbox")}, 60000);

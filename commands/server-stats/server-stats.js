@@ -5,7 +5,7 @@ const { EmbedBuilder } = require('discord.js');
 const getPlayersNumberAndFPS = (platform) => {
     return new Promise((resolve, reject) => {
         let infos = "";
-        const port = platform === 'Steam' ? '1025' : platform === 'Xbox' ? '1032' : '';
+        const port = platform === 'Steam' ? '1025' : platform === 'Xbox' ? '1035' : '';
         
         if(port === '') {
             reject('Invalid platform');
@@ -34,7 +34,7 @@ const getPlayersNumberAndFPS = (platform) => {
 const getPlayers = (platform) => {
     return new Promise((resolve, reject) => {
         let infos = "";
-        const port = platform === 'Steam' ? '1025' : platform === 'Xbox' ? '1032' : '';
+        const port = platform === 'Steam' ? '1025' : platform === 'Xbox' ? '1035' : '';
         
         if(port === '') {
             reject('Invalid platform');
@@ -70,7 +70,7 @@ const getPlayers = (platform) => {
 const getParams = (platform) => {
     return new Promise((resolve, reject) => {
         let infos = "## Paramètres du Serveur : \n";
-        const port = platform === 'Steam' ? '1025' : platform === 'Xbox' ? '1032' : '';
+        const port = platform === 'Steam' ? '1025' : platform === 'Xbox' ? '1035' : '';
         
         if(port === '') {
             reject('Invalid platform');
@@ -111,6 +111,7 @@ module.exports = {
 				.setRequired(true)
 				.addChoices(
 					{ name: 'Steam', value: 'Steam' },
+                    { name: 'Xbox', value: 'Xbox' }
 				))
         .addUserOption(option =>
             option.setName('user')
