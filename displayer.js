@@ -11,7 +11,7 @@ const update = async (headers,bot_guilds,numbers,client,ip,idServer,platform) =>
             url: 'http://'+ip+'/v1/api/metrics',
             headers: { 
               'Accept': 'application/json', 
-              'Authorization': 'Basic YWRtaW46Y2FjYXBpcGlkdTc5'
+              'Authorization': 'Bearer YWRtaW46Y2FjYXBpcGlkdTc5'
             }
           };
           
@@ -25,6 +25,7 @@ const update = async (headers,bot_guilds,numbers,client,ip,idServer,platform) =>
 
         const state_reponse = await fetch("https://panel.louismazin.ovh/api/client/servers/"+idServer+"/resources", { method : "GET", headers });
         const state_data = await state_reponse.json();
+        console.log(state_reponse);
         if(state_data["attributes"]["current_state"] === "running"){
             state = "🟢";
         }else{
