@@ -126,21 +126,11 @@ module.exports = {
             const infos = await getPlayersNumberAndFPS(platform);
             const params = await getParams(platform);
             const players = await getPlayers(platform);
-            const user = interaction.options.getUser('user');
-            
+            const user = interaction.options.getUser('user')
             const message = new EmbedBuilder()
                 .setColor('#0099ff')
                 .setDescription('# Informations sur le Serveur Palworld '+platform+"\n"+infos+(players==="" ? "" : players+"\n")+'\n'+params);
-            
-            // If a user is mentioned, include them in the content to notify them
-            const content = user ? `<@${user.id}>` : null;
-            
-            // Send as a regular message so both users can see it
-            await interaction.reply({ 
-                content: content, 
-                embeds: [message],
-                allowedMentions: user ? { users: [user.id] } : undefined
-            });
+            await interaction.reply({ content: (user ? "||<@"+interaction.options.getUser('user').id+">||\n" : null), embeds: [message] });
         } catch (error) {
             await interaction.reply({ content: "Une erreur est survenue : " + error, ephemeral: true });
         }
