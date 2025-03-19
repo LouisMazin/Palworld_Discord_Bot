@@ -127,17 +127,19 @@ module.exports = {
             const params = await getParams(platform);
             const players = await getPlayers(platform);
             const user = interaction.options.getUser('user');
-            const content = user ? `||<@${user.id}>||` : null;
             
             const message = new EmbedBuilder()
                 .setColor('#0099ff')
                 .setDescription('# Informations sur le Serveur Palworld '+platform+"\n"+infos+(players==="" ? "" : players+"\n")+'\n'+params);
             
-            // Make the message ephemeral
+            // If a user is mentioned, include them in the content to notify them
+            const content = user ? `<@${user.id}>` : null;
+            
+            // Send as a regular message so both users can see it
             await interaction.reply({ 
                 content: content, 
                 embeds: [message],
-                ephemeral: true
+                allowedMentions: user ? { users: [user.id] } : undefined
             });
         } catch (error) {
             await interaction.reply({ content: "Une erreur est survenue : " + error, ephemeral: true });
