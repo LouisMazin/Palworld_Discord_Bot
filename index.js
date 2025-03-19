@@ -75,5 +75,5 @@ client.on(Events.InteractionCreate, async interaction => {
 
 client.login(token);
 
-setInterval(()=>{update(headers,bot_guilds,numbers,client,"play.louismazin.ovh:8212","6ac31481","𝐒𝐭𝐞𝐚𝐦")}, 60000);
-setInterval(()=>{update(headers,bot_guilds,numbers,client,"play.louismazin.ovh:8213","6d14413b","𝐗𝐛𝐨𝐱")}, 60000);
+setInterval(()=>{update(headers,numbers,client)}, 600);
+setInterval(()=>{update(headers,numbers,client)}, 60000);
