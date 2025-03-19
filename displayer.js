@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 
-const update = async (headers,numbers,client) => {
+const update = async (headers,numbers,client,password) => {
     try {
         let state = "🔴";
         let players = "0";
@@ -11,7 +11,7 @@ const update = async (headers,numbers,client) => {
           url: 'http://play.louismazin.ovh:8212/v1/api/metrics',
           headers: { 
             'Accept': 'application/json', 
-            'Authorization': 'Bearer YWRtaW46Y2FjYXBpcGlkdTc5',
+            'Authorization': 'admin:'+password,
           }
         };
           
