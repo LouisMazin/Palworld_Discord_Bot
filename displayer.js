@@ -12,8 +12,6 @@ const update = async (headers,numbers,client) => {
           headers: { 
             'Accept': 'application/json', 
             'Authorization': 'Bearer YWRtaW46Y2FjYXBpcGlkdTc5',
-            'username':'admin',
-            'password':'Cacapipidu79'
           }
         };
           
