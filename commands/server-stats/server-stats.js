@@ -9,10 +9,10 @@ const getPlayersNumberAndFPS = () => {
         axios({
             method: 'get',
             maxBodyLength: Infinity,
-            url: 'http://play.louismazin.ovh:1028/v1/api/metrics',
+            url: 'http://play.louismazin.ovh:8212/v1/api/metrics',
             headers: { 
                 'Accept': 'application/json', 
-                'Authorization': 'Basic YWRtaW46Y2FjYXBpcGlkdTc5'
+                'Authorization': 'Basic YWRtaW46Q2FjYXBpcGlkdTc5'
             }
         })
         .then((response) => {
