@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 
-const update = async (headers,numbers,client,password) => {
+const update = async (headers,numbers,client) => {
     try {
         let state = "🔴";
         let players = "0";
@@ -11,7 +11,7 @@ const update = async (headers,numbers,client,password) => {
           url: 'http://play.louismazin.ovh:8212/v1/api/metrics',
           headers: { 
             'Accept': 'application/json', 
-            'Authorization': 'admin:'+password,
+            'Authorization': 'Basic YWRtaW46Q2FjYXBpcGlkdTc5',
           }
         };
           
@@ -31,13 +31,12 @@ const update = async (headers,numbers,client,password) => {
         }else{
             state = "🔴";
         }
-        const playerNumber = parseInt(players);
-        const title = "𝐒𝐞𝐫𝐯𝐞𝐫 :"+state+" 𝐉𝐨𝐮𝐞𝐮𝐫𝐬 : "+numbers[playerNumber];
+        const title = "𝐒𝐞𝐫𝐯𝐞𝐫 :"+state+" 𝐉𝐨𝐮𝐞𝐮𝐫𝐬 : "+numbers[parseInt(players)];
         client.channels.fetch(1263481798667796623n)
           .then(channel => {
-            if(playerNumber!=0){
+            if(channel.name !== title){
               channel.setName(title);
-              console.log("Bot : Updating "+platform+" channel name to : "+title);
+              console.log("Bot : Updating channel name to : "+title);
             }
           })
           .catch(error => {console.log("Bot : error :"+error);});

@@ -13,7 +13,6 @@ const headers = {
     "Content-Type": "application/json",
     "Authorization": "Bearer "+args[3].toString()
 };
-const password = args[4].toString();
 const numbers=["𝟎","𝟏","𝟐","𝟑","𝟒","𝟓","𝟔","𝟕","𝟖","𝟗","𝟏𝟎","𝟏𝟏","𝟏𝟐","𝟏𝟑","𝟏𝟒","𝟏𝟓","𝟏𝟔","𝟏𝟕","𝟏𝟖","𝟏𝟗","𝟐𝟎","𝟐𝟏","𝟐𝟐","𝟐𝟑","𝟐𝟒","𝟐𝟓","𝟐𝟔","𝟐𝟕","𝟐𝟖","𝟐𝟗","𝟑𝟎","𝟑𝟏","𝟑𝟐"];
 
 client.commands = new Collection();
@@ -75,4 +74,4 @@ client.on(Events.InteractionCreate, async interaction => {
 
 client.login(token);
 
-//setInterval(()=>{update(headers,numbers,client,password)}, 6000);
+setInterval(()=>{update(headers,numbers,client)}, 6000);
