@@ -8,7 +8,7 @@ const update = async (headers,numbers,client) => {
         let config = {
           method: 'get',
           maxBodyLength: Infinity,
-          url: 'http://play.louismazin.ovh:1028/v1/api/metrics',
+          url: 'http://play.louismazin.ovh:8212/v1/api/metrics',
           headers: { 
             'Accept': 'application/json', 
             'Authorization': 'Bearer YWRtaW46Y2FjYXBpcGlkdTc5'
