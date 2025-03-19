@@ -37,10 +37,10 @@ const update = async (headers,numbers,client) => {
           .then(channel => {
             if(playerNumber!=0){
               channel.setName(title);
-              console.log("Bot :"+element.name+": Updating "+platform+" channel name to : "+title);
+              console.log("Bot : Updating "+platform+" channel name to : "+title);
             }
           })
-          .catch(error => {console.log("Bot : error on server "+element.name+" error :"+error);});
+          .catch(error => {console.log("Bot : error :"+error);});
         
     } catch (error) {
         console.log("Bot : "+error);
