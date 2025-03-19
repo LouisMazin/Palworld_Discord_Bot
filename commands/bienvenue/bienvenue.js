@@ -11,8 +11,18 @@ module.exports = {
 				.setDescription('Utilisateur à mentionner')
 				.setRequired(false)),
 	async execute(interaction) {
-		user = interaction.options.getUser('user');
-		welcomeMessage.content = user ? "||<@"+user.id+">||" : "";
-		await interaction.reply(welcomeMessage);
+		const user = interaction.options.getUser('user');
+		const content = user ? `||<@${user.id}>||` : "";
+		
+		// Clone welcomeMessage to avoid modifying the original
+		const response = JSON.parse(JSON.stringify(welcomeMessage));
+		response.content = content;
+		
+		// Make the message ephemeral if there's no mentioned user
+		// If there is a mentioned user, only they and the sender will see it
+		await interaction.reply({
+			...response,
+			ephemeral: true
+		});
 	},
 };

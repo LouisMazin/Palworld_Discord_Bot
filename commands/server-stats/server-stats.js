@@ -2,13 +2,20 @@ const axios = require('axios');
 const { SlashCommandBuilder } = require('discord.js');
 const { EmbedBuilder } = require('discord.js');
 
-const getPlayersNumberAndFPS = () => {
+const getPlayersNumberAndFPS = (platform) => {
     return new Promise((resolve, reject) => {
         let infos = "";
+        const port = platform === 'Steam' ? '8212' : platform === 'Xbox' ? '8213' : '';
+        
+        if(port === '') {
+            reject('Invalid platform');
+            return;
+        }
+
         axios({
             method: 'get',
             maxBodyLength: Infinity,
-            url: 'http://play.louismazin.ovh:8212/v1/api/metrics',
+            url: 'http://play.louismazin.ovh:'+port+'/v1/api/metrics',
             headers: { 
                 'Accept': 'application/json', 
                 'Authorization': 'Basic YWRtaW46Y2FjYXBpcGlkdTc5'
@@ -25,13 +32,20 @@ const getPlayersNumberAndFPS = () => {
         });
     });
 }
-const getPlayers = () => {
+const getPlayers = (platform) => {
     return new Promise((resolve, reject) => {
         let infos = "";
+        const port = platform === 'Steam' ? '8212' : platform === 'Xbox' ? '8213' : '';
+        
+        if(port === '') {
+            reject('Invalid platform');
+            return;
+        }
+
         axios({
             method: 'get',
             maxBodyLength: Infinity,
-            url: 'http://play.louismazin.ovh:8212/v1/api/players',
+            url: 'http://play.louismazin.ovh:'+port+'/v1/api/players',
             headers: { 
                 'Accept': 'application/json', 
                 'Authorization': 'Basic YWRtaW46Y2FjYXBpcGlkdTc5'
@@ -55,13 +69,20 @@ const getPlayers = () => {
         });
     });
 }
-const getParams = () => {
+const getParams = (platform) => {
     return new Promise((resolve, reject) => {
         let infos = "## Paramètres du Serveur : \n";
+        const port = platform === 'Steam' ? '8212' : platform === 'Xbox' ? '8213' : '';
+        
+        if(port === '') {
+            reject('Invalid platform');
+            return;
+        }
+
         axios({
             method: 'get',
             maxBodyLength: Infinity,
-            url: 'http://play.louismazin.ovh:8212/v1/api/settings',
+            url: 'http://play.louismazin.ovh:'+port+'/v1/api/settings',
             headers: { 
                 'Accept': 'application/json', 
                 'Authorization': 'Basic YWRtaW46Y2FjYXBpcGlkdTc5'
@@ -87,20 +108,37 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('server-stats')
 		.setDescription('Afichez les informations sur le Serveur Palworld !')
+		.addStringOption(option =>
+			option.setName('plateforme')
+				.setDescription('Choisissez votre plateforme')
+				.setRequired(true)
+				.addChoices(
+					{ name: 'Steam', value: 'Steam' },
+                    { name: 'Xbox', value: 'Xbox' }
+				))
         .addUserOption(option =>
             option.setName('user')
                 .setDescription('Utilisateur à mentionner')
                 .setRequired(false)),
 	async execute(interaction) {
         try {
-            const infos = await getPlayersNumberAndFPS();
-            const params = await getParams();
-            const players = await getPlayers();
-            const user = interaction.options.getUser('user')
+            const platform = interaction.options.getString('plateforme');
+            const infos = await getPlayersNumberAndFPS(platform);
+            const params = await getParams(platform);
+            const players = await getPlayers(platform);
+            const user = interaction.options.getUser('user');
+            const content = user ? `||<@${user.id}>||` : null;
+            
             const message = new EmbedBuilder()
                 .setColor('#0099ff')
-                .setDescription('# Informations sur le Serveur Palworld \n'+infos+(players==="" ? "" : players+"\n")+'\n'+params);
-            await interaction.reply({ content: (user ? "||<@"+interaction.options.getUser('user').id+">||\n" : null), embeds: [message] });
+                .setDescription('# Informations sur le Serveur Palworld '+platform+"\n"+infos+(players==="" ? "" : players+"\n")+'\n'+params);
+            
+            // Make the message ephemeral
+            await interaction.reply({ 
+                content: content, 
+                embeds: [message],
+                ephemeral: true
+            });
         } catch (error) {
             await interaction.reply({ content: "Une erreur est survenue : " + error, ephemeral: true });
         }

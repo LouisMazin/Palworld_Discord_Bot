@@ -1,4 +1,3 @@
-const axios = require('axios');
 const fs = require('node:fs');
 const path = require('node:path');
 const deploy = require('./deploy_command.js')

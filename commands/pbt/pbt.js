@@ -11,8 +11,17 @@ module.exports = {
 				.setDescription('Utilisateur à mentionner')
 				.setRequired(false)),
 	async execute(interaction) {
-		user = interaction.options.getUser('user');
-		programMessage.content = user ? "||<@"+user.id+">||" : "";
-		await interaction.reply(programMessage);
+		const user = interaction.options.getUser('user');
+		const content = user ? `||<@${user.id}>||` : "";
+		
+		// Clone programMessage to avoid modifying the original
+		const response = JSON.parse(JSON.stringify(programMessage));
+		response.content = content;
+		
+		// Make the message ephemeral to make it visible only to sender and mentioned user
+		await interaction.reply({
+			...response,
+			ephemeral: true
+		});
 	},
 };
