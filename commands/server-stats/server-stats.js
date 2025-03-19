@@ -93,9 +93,9 @@ module.exports = {
                 .setRequired(false)),
 	async execute(interaction) {
         try {
-            const infos = await getPlayersNumberAndFPS(platform);
-            const params = await getParams(platform);
-            const players = await getPlayers(platform);
+            const infos = await getPlayersNumberAndFPS();
+            const params = await getParams();
+            const players = await getPlayers();
             const user = interaction.options.getUser('user')
             const message = new EmbedBuilder()
                 .setColor('#0099ff')
