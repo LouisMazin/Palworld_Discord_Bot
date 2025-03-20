@@ -21,7 +21,7 @@ const getPlayersNumberAndFPS = () => {
             resolve(infos);
         })
         .catch((error) => {
-            console.log("Erreur lors de la récupération des données : " + error);
+            console.log("Erreur lors de l'appel à l'api pterodactyl (serveur injoignable)");
             reject("Le serveur est hors ligne.");
         });
     });
@@ -52,7 +52,7 @@ const getPlayers = () => {
             resolve(infos);
         })
         .catch((error) => {
-            console.log("Erreur lors de la récupération des données : " + error);
+            console.log("Erreur lors de l'appel à l'api pterodactyl (serveur injoignable)");
             reject("Le serveur est hors ligne.");
         });
     });
@@ -81,7 +81,7 @@ const getParams = (platform) => {
             resolve(infos);
         })
         .catch((error) => {
-            console.log("Erreur lors de la récupération des données : " + error);
+            console.log("Erreur lors de l'appel à l'api pterodactyl (serveur injoignable)");
             reject("Le serveur est hors ligne.");
         });
     });

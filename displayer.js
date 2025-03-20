@@ -20,7 +20,7 @@ const update = async (headers,numbers,client) => {
             players = response.data["currentplayernum"];
           })
           .catch((error) => {
-            console.log(error);
+            console.log("Erreur lors de l'appel à l'api pterodactyl (serveur injoignable)");
             players = "0";
           });
 
@@ -36,7 +36,7 @@ const update = async (headers,numbers,client) => {
           .then(channel => {
             if(channel.name !== title){
               channel.setName(title);
-              console.log("Bot : Updating channel name to : "+title);
+              console.log("Channel's name changed for : "+title);
             }
           })
           .catch(error => {console.log("Bot : error :"+error);});
