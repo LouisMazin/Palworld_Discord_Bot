@@ -34,7 +34,7 @@ const update = async (headers,numbers,client) => {
         const title = "𝐒𝐞𝐫𝐯𝐞𝐫 :"+state+" 𝐉𝐨𝐮𝐞𝐮𝐫𝐬 : "+numbers[parseInt(players)];
         client.channels.fetch(1263481798667796623n)
           .then(channel => {
-            if(channel.name !== title){
+            if(channel.name !== title || !state in channel.name){
               channel.setName(title);
               console.log("Channel's name changed for : "+title);
             }
