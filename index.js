@@ -73,4 +73,4 @@ client.on(Events.InteractionCreate, async interaction => {
 
 client.login(token);
 
-setInterval(()=>{update(headers,numbers,client)}, 60000);
+setInterval(()=>{update(headers,numbers,client)}, 300000);
