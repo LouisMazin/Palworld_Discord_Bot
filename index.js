@@ -39,7 +39,7 @@ client.on('guildMemberAdd', async member => {
         await member.send(welcomeDM);
 		console.log(`Message envoyé à ${member.user.tag}`);
     } catch (error) {
-        console.error(`Impossible d'envoyer le message à ${member.user.tag}:`, error);
+        console.error(`Impossible d'envoyer le message à ${member.user.tag}:`);
     }
 });
 
