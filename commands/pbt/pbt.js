@@ -13,7 +13,7 @@ const getDownloadCount = async () => {
         
         let totalDownloads = 0;
         
-        for (const asset of response.data.release[0].assets) {
+        for (const asset of response.data[0].assets) {
 			totalDownloads += asset.download_count;
 		}
         
