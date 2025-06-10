@@ -13,12 +13,9 @@ const getDownloadCount = async () => {
         
         let totalDownloads = 0;
         
-        // Sum up downloads from all releases
-        for (const release of response.data) {
-            for (const asset of release.assets) {
-                totalDownloads += asset.download_count;
-            }
-        }
+        for (const asset of response.data.release[0].assets) {
+			totalDownloads += asset.download_count;
+		}
         
         return totalDownloads;
     } catch (error) {
