@@ -44,7 +44,7 @@ module.exports = {
 		
 		// Add download count to the embed description
 		if (downloadCount !== null) {
-			message.description = message.description.replace("X", downloadCount.toString()).replace("Y", (downloadCount + 1).toString());
+			message.description = message.description.toString().replace("X", downloadCount.toString()).replace("Y", (downloadCount + 1).toString());
 		}
 		
 		message.content = user ? "||<@"+user.id+">||" : "";
