@@ -41,14 +41,11 @@ module.exports = {
 		
 		// Clone the message to avoid modifying the original
 		const message = JSON.parse(JSON.stringify(programMessage));
-		console.log(message);
 		// Add download count to the embed description
 		if (downloadCount !== null) {
-			console.log(message.description);
-			console.log(typeof message.description);
-			message.description = message.description.replace("X", downloadCount.toString()).replace("Y", (downloadCount + 1).toString());
+			message.embeds[0].description = message.embeds[0].description.replace("X", downloadCount.toString()).replace("Y", (downloadCount + 1).toString());
 		}
-		
+
 		message.content = user ? "||<@"+user.id+">||" : "";
 		await interaction.reply(message);
 	},
