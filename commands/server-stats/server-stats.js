@@ -102,7 +102,7 @@ module.exports = {
             const user = interaction.options.getUser('user')
             const message = new EmbedBuilder()
                 .setColor('#0099ff')
-                .setDescription('# Informations sur le Serveur Palworld\n\n## :video_game: Nom du serveur :\n### Rygainland\n\n## :wireless: IP :\n### play.louismazin.ovh:1028\n\n## :no_entry: Mot de passe :\n### serverpassword\n\n## :repeat: État :\n### https://discord.com/channels/1068240252092813373/1263481798667796623'+infos+(players==="" ? "" : players+"\n")+'\n'+params);
+                .setDescription('# Informations sur le Serveur Palworld\n\n## :video_game: Nom du serveur :\n### Rygainland\n\n## :wireless: IP :\n### play.louismazin.ovh:1028\n\n## :no_entry: Mot de passe :\n### serverpassword\n\n## :repeat: État :\n### https://discord.com/channels/1068240252092813373/1263481798667796623\n'+infos+(players==="" ? "" : players+"\n")+'\n'+params);
             await interaction.reply({ content: (user ? "||<@"+interaction.options.getUser('user').id+">||\n" : null), embeds: [message] });
         } catch (error) {
             await interaction.reply({ content: "Une erreur est survenue : " + error, ephemeral: true });
