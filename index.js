@@ -65,4 +65,4 @@ client.on(Events.InteractionCreate, async interaction => {
 client.login(token);
 
 setInterval(()=>{update(headers,numbers,client)}, 300000);
-setInterval(()=>{clean(client)}, 5000); // 86400000
+setInterval(()=>{clean(client)}, 86400000);
