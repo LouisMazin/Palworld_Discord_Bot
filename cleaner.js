@@ -5,7 +5,7 @@ const clean = async (client) => {
     try {
         client.channels.fetch(1324814179101704373n)
           .then(channel => {
-            channel.messages.fetch({ limit: 10000 })
+            channel.messages.fetch({ limit: 100 })
               .then(messages => {
                 messages = messages.filter(m => !m.pinned);
                 channel.bulkDelete(messages)
