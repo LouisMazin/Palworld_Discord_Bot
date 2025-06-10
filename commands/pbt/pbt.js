@@ -41,7 +41,7 @@ module.exports = {
 		
 		// Clone the message to avoid modifying the original
 		const message = JSON.parse(JSON.stringify(programMessage));
-		
+		console.log(message);
 		// Add download count to the embed description
 		if (downloadCount !== null) {
 			console.log(message.description);
