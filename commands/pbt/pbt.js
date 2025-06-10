@@ -46,7 +46,7 @@ module.exports = {
 			const actual = downloadCount.toString();
 			let next = (downloadCount + 1).toString();
 			const lastNumber = actual[actual.length - 1];
-			next += lastNumber=='1' ? "st" : lastNumber=='2' ? "nd" : lastNumber=='3' ? "rd" : "th";
+			next += lastNumber=='1' ? "ère" : "ème";
 			message.embeds[0].description = message.embeds[0].description.replace("X", actual).replace("Y", next);
 		}
 
