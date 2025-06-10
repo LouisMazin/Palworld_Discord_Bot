@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 
-const cleaner = async (client) => {
+const clean = async (client) => {
     try {
         client.channels.fetch(1324814179101704373n)
           .then(channel => {
@@ -15,4 +15,4 @@ const cleaner = async (client) => {
         console.log("Bot : "+error);
     }
 };
-module.exports = cleaner;
+module.exports = clean;

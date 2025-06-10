@@ -2,6 +2,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const deploy = require('./deploy_command.js')
 const update  = require('./displayer.js');
+const clean = require('./cleaner.js');
 const { Client, GatewayIntentBits, Collection, Events } = require('discord.js');
 
 const client = new Client({ intents: [GatewayIntentBits.GuildMembers,GatewayIntentBits.GuildMessages] });
