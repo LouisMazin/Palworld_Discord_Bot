@@ -43,7 +43,11 @@ module.exports = {
 		const message = JSON.parse(JSON.stringify(programMessage));
 		// Add download count to the embed description
 		if (downloadCount !== null) {
-			message.embeds[0].description = message.embeds[0].description.replace("X", downloadCount.toString()).replace("Y", (downloadCount + 1).toString());
+			const actual = downloadCount.toString();
+			let next = (downloadCount + 1).toString();
+			const lastNumber = actual[actual.length - 1];
+			next += lastNumber=='1' ? "st" : lastNumber=='2' ? "nd" : lastNumber=='3' ? "rd" : "th";
+			message.embeds[0].description = message.embeds[0].description.replace("X", actual).replace("Y", next);
 		}
 
 		message.content = user ? "||<@"+user.id+">||" : "";
